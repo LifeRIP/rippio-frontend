@@ -1,3 +1,4 @@
+import { isChatConfigured } from '@m/core/apollo-client';
 /* eslint-disable react/prop-types */
 import LeftMessage from '@m/core/components/leftMessage/LeftMessage';
 import RightMessage from '@m/core/components/rightMessage/RightMessage';
@@ -7,7 +8,7 @@ import { useEffect } from 'react';
 import { useChatMutation, useChatQuery, useChatSubscription } from '../../hooks/custom-hooks';
 import { useAuth } from "@m/core/hooks/useAuth";
 
-export default function ChatModal({ isOpen, closeModal, order }) {
+function ConfiguredChatModal({ isOpen, closeModal, order }) {
     const user = useAuth((state) => state.user);
     const { data, loading } = useChatQuery(order.id)
     const { handleSendMessage, handleChange, message } = useChatMutation(order.id);
@@ -78,4 +79,18 @@ export default function ChatModal({ isOpen, closeModal, order }) {
             </Modal>
         </div>
     )
+}
+export default function ChatModal(props) {
+    if (isChatConfigured) return <ConfiguredChatModal {...props} />;
+    return (
+        <Modal isOpen={props.isOpen} onRequestClose={props.closeModal} className='ChatModal Modal'>
+            <header className='ChatModal-header'>
+                <h3>Chat no disponible</h3>
+                <button onClick={props.closeModal} aria-label='Cerrar chat'>X</button>
+            </header>
+            <section className='ChatModal-body'>
+                <p>El servicio de mensajes todavía no está configurado.</p>
+            </section>
+        </Modal>
+    );
 }

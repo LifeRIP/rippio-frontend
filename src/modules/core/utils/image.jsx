@@ -12,18 +12,25 @@ const firebaseConfig = {
     measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
-const app = initializeApp(firebaseConfig);
-const storage = getStorage(app);
+const app = firebaseConfig.apiKey && firebaseConfig.projectId && firebaseConfig.storageBucket ? initializeApp(firebaseConfig) : null;
+const storage = app ? getStorage(app) : null;
+
+function requireStorage() {
+    if (!storage) {
+        throw new Error('La subida de imágenes no está disponible: falta configurar el almacenamiento.');
+    }
+    return storage;
+}
 
 export async function uploadFile(file, to, name){
-    const storageRef = ref(storage, `${to}/${name}`);
+    const storageRef = ref(requireStorage(), `${to}/${name}`);
     await uploadBytes(storageRef, file);
     const url = await getDownloadURL(storageRef);
     return url;
 }
 
 export async function renameFile(oldPath, newPath) {
-    const storage = getStorage();
+    const storage = requireStorage();
     const oldRef = ref(storage, oldPath);
     const newRef = ref(storage, newPath);
 
