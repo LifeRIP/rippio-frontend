@@ -10,9 +10,9 @@ import { useAuth } from "@m/core/hooks/useAuth";
 
 function ConfiguredChatModal({ isOpen, closeModal, order }) {
     const user = useAuth((state) => state.user);
-    const { data, loading } = useChatQuery(order.id)
-    const { handleSendMessage, handleChange, message } = useChatMutation(order.id);
-    useChatSubscription(order.id);
+    const { data, loading, error: queryError } = useChatQuery(order.id)
+    const { handleSendMessage, handleChange, message, error: sendError, sending } = useChatMutation(order.id);
+    const { error: subscriptionError } = useChatSubscription(order.id);
 
     // Llevar el scroll del ChatModal-body al final
     useEffect(() => {
@@ -49,6 +49,9 @@ function ConfiguredChatModal({ isOpen, closeModal, order }) {
                     }
 
                     {loading && <p>Cargando mensajes ⌛</p>}
+                    {(queryError || sendError || subscriptionError) && (
+                        <p role='alert'>{sendError || queryError?.message || subscriptionError?.message}</p>
+                    )}
 
                     {user.tipo_usuario == 3 && data && data.getchat_order.map((data, index) =>
                     (data.tipo_usuario == 3 ?
@@ -67,9 +70,9 @@ function ConfiguredChatModal({ isOpen, closeModal, order }) {
                             onSubmit={handleSendMessage}
                         >
                             <input className='ChatModal-footer_input' type='text' placeholder='Escribe un mensaje...'
-                                onChange={handleChange} value={message}
+                                onChange={handleChange} value={message} disabled={sending}
                             />
-                            <button className='ChatModal-footer_button'>
+                            <button className='ChatModal-footer_button' disabled={sending || !message.trim()}>
                                 <img className='ChatModal-footer_button_image' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FsendIcon.png?alt=media&token=7d5c3f4d-08d5-42a8-8744-4e5cf8777b09' alt='Enviar' />
                             </button>
                         </form>
@@ -81,6 +84,7 @@ function ConfiguredChatModal({ isOpen, closeModal, order }) {
     )
 }
 export default function ChatModal(props) {
+    if (!props.isOpen || !props.order) return null;
     if (isChatConfigured) return <ConfiguredChatModal {...props} />;
     return (
         <Modal isOpen={props.isOpen} onRequestClose={props.closeModal} className='ChatModal Modal'>

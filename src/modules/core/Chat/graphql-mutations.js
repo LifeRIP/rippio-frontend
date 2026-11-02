@@ -14,6 +14,10 @@ export const POST_MESSAGE_IN_ORDER_ID = gql`
       token: $token
     ) {
       id
+      mensaje
+      fecha
+      tipo_usuario
+      img_icon
     }
   }
 `;

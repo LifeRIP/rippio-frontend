@@ -15,6 +15,9 @@ if (isChatConfigured) {
   const wsLink = new GraphQLWsLink(createClient({
     url: import.meta.env.VITE_API_URL_GRAPHQL_WS,
     retryAttempts: Infinity,
+    on: {
+      connected: () => { client.refetchQueries({ include: 'active' }).catch(() => {}); },
+    },
   }));
   const httpLink = new HttpLink({ uri: import.meta.env.VITE_API_URL_GRAPHQL });
   link = split(
@@ -28,6 +31,25 @@ if (isChatConfigured) {
 }
 
 export const client = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          getchat_order: {
+            merge(existing = [], incoming, { readField }) {
+              const messages = new Map();
+              for (const message of [...existing, ...incoming]) {
+                messages.set(readField('id', message), message);
+              }
+              return [...messages.values()].sort((a, b) =>
+                String(readField('fecha', a)).localeCompare(String(readField('fecha', b))) ||
+                Number(readField('id', a)) - Number(readField('id', b))
+              );
+            },
+          },
+        },
+      },
+    },
+  }),
   link,
 });
