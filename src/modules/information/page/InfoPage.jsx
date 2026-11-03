@@ -31,7 +31,7 @@ export function InfoPage() {
                 <div className='info-container-mision'>
                     <h2 className='info-container-mision-h2'>¿Cuál es nuestra Misión?</h2>
                     <p className='info-container-mision-p'>Nuestra aplicación fue creada en 2024 en la vibrante ciudad de Tuluá, con la misión de
-                                transformar la experiencia gastronómica y brindar beneficios tanto a los usuarios como a los establecimientos culinarios.En Rippio Food, nos comprometemos a ofrecer una plataforma confiable y eficiente que mejore la vida de nuestros usuarios y apoye el crecimiento de los restaurantes
+                                transformar la experiencia gastronómica y brindar beneficios tanto a los usuarios como a los establecimientos culinarios. En Rippio Food, nos comprometemos a ofrecer una plataforma confiable y eficiente que mejore la vida de nuestros usuarios y apoye el crecimiento de los restaurantes
                             locales. Creemos en la transparencia como un pilar fundamental, y trabajamos arduamente para proteger los intereses de nuestros consumidores y socios comerciales.</p>
 
                     <h2 className='info-container-mision-h2'>Transparencia y confianza</h2>
