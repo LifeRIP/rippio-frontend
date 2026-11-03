@@ -104,7 +104,7 @@
 }
 
 .ProfilePaymentMethods-form-card{
-    background-image: url(https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/ProfilePage%2FPaymentMethodsCards%2FRippioCardDefault.png?alt=media&token=373cd089-568f-4f6f-b620-e987d4a89aad);
+    background-image: url(/media/illustrations/payment-card.svg);
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 1em;
@@ -121,6 +121,7 @@
 }
 
 .ProfilePaymentMethods-franchise{
+    z-index: 2;
     position: absolute;
     right: 0;
     bottom: 0;
@@ -128,6 +129,16 @@
     object-fit: contain;
     padding: 0.5em;
 }
+
+.payment-card-artwork {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+.ProfilePaymentMethods-form-card > div { position: relative; z-index: 1; }
 
 .ProfilePaymentMethods-form-card-number{
     color: #ffffff;

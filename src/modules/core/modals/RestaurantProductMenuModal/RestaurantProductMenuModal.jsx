@@ -1,3 +1,5 @@
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
 /* eslint-disable react/prop-types */
 import Modal from 'react-modal'
 import './restaurantProductMenuModal.css'
@@ -193,14 +195,14 @@ export default function RestaurantProductMenuModal({ loading, setFile, isModalOp
                             className='AddProductMenuModal-form-input AddProductMenuModal-form-inputImage'
                         >
                             <label className="hidden-label">Subir imagen</label>
-                            <img
+                            <AppImage kind="product" name={newProduct?.nombre || productSelectedToEdit?.nombre}
                                 className={'AddProductMenuModal-form-inputImage-img' + ' ' +
                                     (loading ? 'AddProductMenuModal-form-inputImage-imgLoading' :
                                         image.length > 0 ? '' : 'AddProductMenuModal-form-inputImage-imgDefault')}
                                 src={
-                                    loading ? 'https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2Floading.png?alt=media&token=b1a554d7-4784-4f3c-892b-662ff72a3804'
+                                    loading ? media.icons["loader"]
                                         : image.length > 0 ? image
-                                            : 'https://cdn-icons-png.flaticon.com/512/32/32339.png'
+                                            : media.icons.image
                                 }
                             />
                             <input
@@ -209,8 +211,8 @@ export default function RestaurantProductMenuModal({ loading, setFile, isModalOp
                                 onChange={handleInputProfileChange} />
                             <Tippy content='Intentaremos dar la mejor presentación al público'>
                                 <button type='button' className="AddProductMenuModal-form-inputImage-Btn" onClick={handleButtonClick}>
-                                    <img draggable='false' className="AddProductMenuModal-form-inputImage-imgBtn"
-                                        src="https://icons.veryicon.com/png/o/miscellaneous/linear-small-icon/edit-246.png"
+                                    <AppImage draggable='false' className="AddProductMenuModal-form-inputImage-imgBtn"
+                                        src={media.icons.edit}
                                         alt="Upload Icon" />
                                 </button>
                             </Tippy>

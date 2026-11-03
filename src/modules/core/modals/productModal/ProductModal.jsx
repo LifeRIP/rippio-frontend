@@ -1,3 +1,4 @@
+import { AppImage } from '@m/core/components/appImage/AppImage';
 /* eslint-disable react/prop-types */
 import Modal from 'react-modal';
 import './productModal.css';
@@ -36,7 +37,7 @@ export const ProductModal = ({ productInModal, restaurant, isOpen, handleAddBtn,
                     <section className='ProductModal-section-container'>
                         <section className='ProductModal-sectionImg'>
                             <div className='ProductModal-sectionImg-imgContainer'>
-                                <img draggable='false' src={product.img_product} alt={product.nombre} />
+                                <AppImage kind="product" name={product.nombre} draggable='false' src={product.img_product} alt={product.nombre} />
                             </div>
                             <div className='ProductModal-sectionImg-quantityContainer'>
                                 <button className='ProductModal-sectionImg-quantityContainer-btn' onClick={decreaseQuantity}>-</button>

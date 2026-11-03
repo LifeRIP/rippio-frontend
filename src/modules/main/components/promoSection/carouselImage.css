@@ -12,11 +12,37 @@
 
 .Carousel img {
     width: 100%;
-    height: auto;
-    object-fit: fill;
+    height: 100%;
+    object-fit: cover;
     border-radius: 10px;
     filter: brightness(95%);
 }
+
+.carousel-promotion {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #075451;
+}
+.carousel-promotion::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, #032b2ae8, #032b2a22 80%);
+}
+.carousel-promotion-copy {
+    position: absolute;
+    z-index: 1;
+    inset: auto 9% 12%;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+}
+.carousel-promotion-copy span { color: #ffdc72; font-size: .75em; font-weight: 600; }
+.carousel-promotion-copy h3 { font-size: clamp(1.6rem, 3vw, 2.5rem); line-height: 1.15; margin: .25em 0; }
+.carousel-promotion-copy p { font-size: .9em; }
 
 swiper-container::part(button-next), swiper-container::part(button-prev) {
     width: .7em;

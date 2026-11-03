@@ -11,7 +11,7 @@
     width: 100%;
 }
 
-.chg-container > img{
+.chg-container > :is(img, svg){
     width: 8em;
 }
 

@@ -1,3 +1,4 @@
+import { AppImage } from '@m/core/components/appImage/AppImage';
 /* eslint-disable react/prop-types */
 import { useNavigate } from 'react-router-dom';
 import { formatDateYMDH_TO_DMY } from '../../utils/constants'
@@ -57,7 +58,7 @@ export default function RestaurantList({ restaurants, loading, handleSwitchState
                         >
                             <td>
                                 <div className='restaurantList_card_imageName'>
-                                    <img className='restaurantList_card_image' src={restaurant.img_icon} alt={restaurant.name} />
+                                    <AppImage kind="restaurant" name={restaurant.nombre || restaurant.name} className='restaurantList_card_image' src={restaurant.img_icon} alt={restaurant.name} />
                                     <h3 className='restaurantList_card_text'>{restaurant.nombre}</h3>
                                 </div>
                             </td>

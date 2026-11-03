@@ -1,3 +1,4 @@
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import Select from 'react-select'
 import { Footer } from '@m/core/components/footer/Footer'
 import HeaderSearch from '@m/core/components/headerSearch/HeaderSearch'
@@ -73,7 +74,7 @@ export function Checkout() {
                                     cart &&
                                     cart.items.map((item) => (
                                         <section key={item.uniqueKey} className='CheckoutPage-content-item-content-cart-item'>
-                                            <img draggable='false' src={item.product.img_product} alt={item.product.nombre} />
+                                            <AppImage kind="product" name={item.product.nombre} draggable='false' src={item.product.img_product} alt={item.product.nombre} />
                                             <section>
                                                 <h3>{item.product.nombre}</h3>
                                                 <p>{item.product.descripcion}</p>

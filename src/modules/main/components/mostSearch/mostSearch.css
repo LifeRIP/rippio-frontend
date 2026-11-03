@@ -39,7 +39,7 @@
     margin-right: 1.5em;
 }
 
-.problemReport img{
+.problemReport :is(img, svg){
     object-fit: contain;
     width: 4em;
     margin: 0 .7em;

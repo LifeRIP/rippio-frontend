@@ -66,16 +66,18 @@
     font-size: 0.9em;
 }
 
+.mainContent-headerPrincipalPage-logo { width: 9em; flex-shrink: 0; }
 .logoIcon{
     width: 100%;
-    margin-left: 1em;
-    margin-top: .2em;
+    height: auto;
+    object-fit: contain;
 }
 
 
 .cartIcon{
     cursor: pointer;
     width: 1.6em;
+    height: 1.6em;
 }
 
 .headerPrincipalPage-a{
@@ -126,8 +128,7 @@
 }
 
 .logoIcon{
-    width: 70%;
-    margin-left: 1em;
+    width: 100%;
 }
 
 

@@ -1,3 +1,5 @@
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import { isChatConfigured } from '@m/core/apollo-client';
 /* eslint-disable react/prop-types */
 import LeftMessage from '@m/core/components/leftMessage/LeftMessage';
@@ -33,7 +35,7 @@ function ConfiguredChatModal({ isOpen, closeModal, order }) {
                 className='ChatModal Modal'
             >
                 <header className='ChatModal-header'>
-                    <img className='ChatModal-header_image' src={order.img_icon} alt='Chat' />
+                    <AppImage kind="restaurant" name={order.nombre || order.name} className='ChatModal-header_image' src={order.img_icon} alt='Chat' />
                     {
                         user.tipo_usuario == 1 ?
                             <h3>{order.nombre}</h3>
@@ -73,7 +75,7 @@ function ConfiguredChatModal({ isOpen, closeModal, order }) {
                                 onChange={handleChange} value={message} disabled={sending}
                             />
                             <button className='ChatModal-footer_button' disabled={sending || !message.trim()}>
-                                <img className='ChatModal-footer_button_image' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FsendIcon.png?alt=media&token=7d5c3f4d-08d5-42a8-8744-4e5cf8777b09' alt='Enviar' />
+                                <AppImage className='ChatModal-footer_button_image' src={media.icons["send"]} alt='Enviar' />
                             </button>
                         </form>
                         : <p className='ChatModal-footer_message'>La conversación ha finalizado. El estado de la orden es {order.estado}</p>

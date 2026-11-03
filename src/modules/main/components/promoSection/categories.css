@@ -61,6 +61,7 @@
 .Categories-content-item-img{
     margin-top: .9em;
     width: 6.5em; 
+    aspect-ratio: 1;
     border-radius: 50%;
     object-fit: cover;
 }

@@ -1,3 +1,4 @@
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -86,7 +87,7 @@ export default function HeaderDrawer() {
 
     return (
         <div className='Header-Drawer'>
-            <Button onClick={toggleDrawer(true)}><img className='drawerIcon' src='/principalPage/icons/optionLinesIcon.png' /></Button>
+            <Button onClick={toggleDrawer(true)}><AppImage className='drawerIcon' src='/principalPage/icons/optionLinesIcon.png' /></Button>
             <Drawer className={estilos.headerDrawerLi} anchor={'right'} open={open} onClose={toggleDrawer(false)}>
                 {DrawerList}
             </Drawer>

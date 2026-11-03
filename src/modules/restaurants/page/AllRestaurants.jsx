@@ -1,3 +1,5 @@
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import { Footer } from '@m/core/components/footer/Footer'
 import HeaderNav from '@m/core/components/headerNav/HeaderNav'
 import Select from 'react-select'
@@ -151,14 +153,14 @@ export function AllRestaurants() {
                                             <button
                                                 onClick={() => navigator(`/restaurant/${restaurant.id}`)}
                                                 key={index} className='all-restaurants-main-restaurant'>
-                                                <img draggable='false' src={restaurant.img_banner} alt='banner' />
+                                                <AppImage kind="banner" name={restaurant.nombre} draggable='false' src={restaurant.img_banner} alt='banner' />
                                                 <div className='all-restaurants-main-restaurant-info'>
-                                                    <img draggable='false' src={restaurant.img_icon} alt='Logo' />
+                                                    <AppImage kind="restaurant" name={restaurant.nombre || restaurant.name} draggable='false' src={restaurant.img_icon} alt='Logo' />
                                                     <div className='all-restaurants-main-restaurant-name-container'>
                                                         <h2 className='all-restaurants-main-restaurant-name'>{restaurant.nombre}</h2>
                                                     </div>
                                                     <div className='all-restaurants-main-restaurant-rating-container'>
-                                                        <img draggable='false' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2Fstar.png?alt=media&token=333d2b1d-f002-4105-8598-a13999ab3485' alt='star' />
+                                                        <AppImage draggable='false' src={media.icons["star"]} alt='star' />
                                                         <p>{restaurant.calificacion}</p>
                                                     </div>
                                                 </div>

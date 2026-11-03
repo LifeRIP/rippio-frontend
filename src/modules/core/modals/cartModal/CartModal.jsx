@@ -1,3 +1,5 @@
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import Modal from 'react-modal';
 import { useCart } from '@m/core/hooks/useCart';
 import './cartModal.css'
@@ -46,7 +48,7 @@ export function CartModal() {
                                         cart.items.map((item, index) => (
                                             <div key={item.uniqueKey} className='ModalCart-content-item'>
                                                 <div className='ModalCart-content-item-product'>
-                                                    <img draggable='false' alt='product' src={item.product.img_product} />
+                                                    <AppImage kind="product" name={item.product.nombre} draggable='false' alt='product' src={item.product.img_product} />
                                                     <div className='ModalCart-content-item-info'>
                                                         <h3>{item.product.nombre}</h3>
                                                         {/* <p className='ModalCart-content-item-info-desc'>{item.product.descripcion}</p> */}
@@ -82,7 +84,7 @@ export function CartModal() {
                         <>
                             <section className='ModalCart-content'>
                                 <div className='ModalCart-content-items'>
-                                    <img className='ModalCart-content-items-img' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/CartModal%2FEmptyIcon.png?alt=media&token=c47e70d1-4819-499d-b6e2-d6a4bdbb140a'></img>
+                                    <AppImage className='ModalCart-content-items-img' src={media.icons["empty-cart"]}></AppImage>
                                     <h3 className='ModalCart-content-items-h3'>Aún no tienes productos en tu carrito</h3>
                                 </div>
                             </section>

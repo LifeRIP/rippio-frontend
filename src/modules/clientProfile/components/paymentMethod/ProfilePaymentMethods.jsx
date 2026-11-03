@@ -1,3 +1,5 @@
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import 'tippy.js/dist/tippy.css';
 import Select from 'react-select'
 import './ProfilePaymentMethods.css';
@@ -42,9 +44,9 @@ export function ProfilePaymentMethods() {
 
     //Icono de las franquicias
     const cardIcons = {
-        1: { image: 'https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/ProfilePage%2FPaymentMethodsCards%2FcardIcons%2FAmericanExpress.png?alt=media&token=a2acd094-f28d-48d0-ac05-9054f4e67280' },
-        2: { image: 'https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/ProfilePage%2FPaymentMethodsCards%2FcardIcons%2FMasterCard.png?alt=media&token=84c20e32-0b8c-44ab-a678-362d952b9921' },
-        3: { image: 'https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/ProfilePage%2FPaymentMethodsCards%2FcardIcons%2FVisa.png?alt=media&token=35442c80-7bc5-4eda-93e9-8274606a957f' }
+        1: { image: media.franchises.amex },
+        2: { image: media.franchises.mastercard },
+        3: { image: media.franchises.visa }
     };
 
     //Añadir los metodos de pago al select
@@ -254,9 +256,9 @@ export function ProfilePaymentMethods() {
                                             Tarjeta {form.isSaved ? form.numero.slice(0, 4) + ' ❋❋❋❋ ❋❋❋❋ ' + '❋❋' + form.numero.slice(-2) : 'Nueva'}
                                             {
                                                 form.arrow ?
-                                                    <img src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FupArrow.png?alt=media&token=4014049e-5578-4b03-be3f-f36cdbf35dd0' alt='arrow-up' className='information-buttonArrow' />
+                                                    <AppImage src={media.icons["chevron-up"]} alt='arrow-up' className='information-buttonArrow' />
                                                     :
-                                                    <img src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FdownArrow.png?alt=media&token=2eb9a78a-94b0-4c11-b2c0-41788a4f46cc' alt='arrow-down' className='information-buttonArrow' />
+                                                    <AppImage src={media.icons["chevron-down"]} alt='arrow-down' className='information-buttonArrow' />
                                             }
                                         </button>
                                     </div>
@@ -266,19 +268,17 @@ export function ProfilePaymentMethods() {
                                         <div className='div-banco'>
                                             {!form.isSaved && <Select className='select selecbank' required styles={customStyles} options={metodos_pago} placeholder='Selecciona tu banco' isDisabled={form.isConfirmed} maxMenuHeight={115} onChange={option => handleSelectChange(form.id, option)} value={form.selectedOption} />}
                                         </div>
-                                        <div className={`ProfilePaymentMethods-form-card`} style={form.imagen ? {
-                                            // Cambiar el background de la tarjeta dependiendo del banco, la imagen está en typeOfPayments
-                                            backgroundImage: `url(${form.imagen})`
-                                        } : {}}
-                                        >
+                                        <div className="ProfilePaymentMethods-form-card">
+                                            <AppImage kind="payment-card" src={form.imagen}
+                                                className="payment-card-artwork" alt="" aria-hidden="true" />
                                             {
                                                 form.numero.length >= 4
-                                                && <img draggable='false' className='ProfilePaymentMethods-franchise' src={
+                                                && <AppImage kind="payment-card" alt="Franquicia de la tarjeta" draggable='false' className='ProfilePaymentMethods-franchise' src={
                                                     form.numero.startsWith('4') ? cardIcons[3].image :
                                                         form.numero.startsWith('5') ? cardIcons[2].image :
                                                             (form.numero.startsWith('34') || form.numero.startsWith('37')) ? cardIcons[1].image :
-                                                                null
-                                                }></img>
+                                                                media.icons.payment
+                                                }></AppImage>
                                             }
                                             <div className={`ProfilePaymentMethods-form-card-number`}>
                                                 <input className='ProfilePaymentMethods-Input' type="text" id="paymentmethodNum" name="paymentmethod" required

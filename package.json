@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:media": "node --test tests/media.test.mjs",
+    "test:media:e2e": "cypress run --spec cypress/e2e/media_recovery.cy.js --config baseUrl=http://127.0.0.1:5175,video=false"
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",
@@ -22,6 +24,7 @@
     "graphql-ws": "^5.16.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.2",
+    "lucide-react": "^1.66.0",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",

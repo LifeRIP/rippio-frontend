@@ -1,3 +1,4 @@
+import { media } from '@m/core/utils/media';
 import { Footer } from "@m/core/components/footer/Footer";
 import HeaderSearch from "@m/core/components/headerSearch/HeaderSearch";
 import { Outlet } from 'react-router-dom';
@@ -13,27 +14,27 @@ import { useCart } from "@m/core/hooks/useCart";
 const links = [
     {
         to: '/profile/settings',
-        icon: 'https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FsettingsIcon.png?alt=media&token=10bb50e5-e52e-4516-9163-95f8bca1532b',
+        icon: media.icons["settings"],
         text: 'Ajustes de cuenta'
     },
     {
         to: '/profile/directions',
-        icon: 'https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FubicationIcon.png?alt=media&token=5b448b09-8a03-4e0d-805d-913417f783cc',
+        icon: media.icons["location"],
         text: 'Direcciones'
     },
     {
         to: '/profile/paymentmethods',
-        icon: 'https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FpaymentMethod.png?alt=media&token=7e222e81-16d2-4dea-a72b-173747dccdc7',
+        icon: media.icons["payment"],
         text: 'Métodos de pago'
     },
     {
         to: '/profile/credits',
-        icon: 'https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FcreditsIcon.png?alt=media&token=e608b819-b6cd-4999-a799-a4d27d172fdf',
+        icon: media.icons["credits"],
         text: 'Créditos'
     },
     {
         to: '/profile/orders',
-        icon: 'https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FwatchIcon.png?alt=media&token=0fd1e369-ac01-475f-a219-5a567f89c775',
+        icon: media.icons["clock"],
         text: 'Últimos pedidos'
     }
 ]

@@ -89,7 +89,7 @@
     margin-left: 10px;
 }
 
-.FormSearchBtn img{
+.FormSearchBtn :is(img, svg){
     width: 100%;
 }
 

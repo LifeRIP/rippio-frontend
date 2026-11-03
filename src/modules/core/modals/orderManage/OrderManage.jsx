@@ -1,3 +1,4 @@
+import { AppImage } from '@m/core/components/appImage/AppImage';
 /* eslint-disable react/prop-types */
 import Modal from 'react-modal'
 import './orderManage.css'
@@ -88,7 +89,7 @@ export default function OrderManage({ order, isOpen, setIsOpen, setSelectedOrder
                             loading ? <p>Cargando...</p> :
                                 orderDetail && orderDetail.map((product, index) => (
                                     <article key={index} className='OrderManage-content-items-item'>
-                                        <img draggable='false' src={product.img_product} alt='food' />
+                                        <AppImage kind="product" name={product.nombre} draggable='false' src={product.img_product} alt='food' />
                                         <div>
                                             <div>
                                                 <p>{product.nombre}</p>

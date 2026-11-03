@@ -1,3 +1,5 @@
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import { useEffect, useState } from 'react'
 import './restaurantProfileMenu.css'
 import uuid from 'react-uuid'
@@ -281,7 +283,7 @@ export function RestaurantProfileMenu() {
                                         </section>
                                         :
                                         <section className="RestaurantProfileMenu-noProducts">
-                                            <img draggable='false' className='RestaurantProfileMenu-noProducts-img' src="https://static.vecteezy.com/system/resources/previews/036/512/636/non_2x/ai-generated-bowl-of-tasty-hot-pot-with-shrimps-on-transparent-background-png.png" alt="menu" />
+                                            <AppImage draggable='false' className='RestaurantProfileMenu-noProducts-img' src={media.icons.image} alt="menu" />
                                             <h1 >Menú</h1>
                                             <h2 >Empieza a crear tu menú con todo tipo de productos y categorías</h2>
                                             <button onClick={handleBeginCreatingProducts} className="RestaurantProfileMenu-noProducts-button">Iniciar</button>

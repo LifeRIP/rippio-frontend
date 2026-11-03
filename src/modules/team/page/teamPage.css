@@ -43,14 +43,15 @@
     text-align: center;
 }
 
-.team-container-title > img{
+.team-container-title > :is(img, svg){
     width: 13em;
+    height: 13em;
     margin-top: 1em;
     filter: drop-shadow(0 10px 7px rgba(0, 0, 0, 0.397));
     transition: transform .5s;
 }
 
-.team-container-title > img:hover{
+.team-container-title > :is(img, svg):hover{
     transform: scale(1.05);
     transition: transform .5s;
 }
@@ -115,12 +116,13 @@
     padding: 0 1em;
 }
 
-.team-container-grid > div > img{
+.team-container-grid > div > :is(img, svg){
     height: 7em;
+    width: 7em;
     transition: transform .2s;
 }
 
-.team-container-grid > div > img:hover{
+.team-container-grid > div > :is(img, svg):hover{
     transform: scale(1.05);
     transition: transform .2s;
 }

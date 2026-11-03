@@ -1,3 +1,5 @@
+import { AppImage } from '@m/core/components/appImage/AppImage';
+import { media } from '@m/core/utils/media';
 /* eslint-disable react/no-unescaped-entities */
 // import { Link } from 'react-router-dom';
 import HeaderNav  from '@m/core/components/headerNav/HeaderNav';
@@ -17,10 +19,8 @@ export function InfoPage() {
         <div className='background-container'>
             <HeaderNav />
             <div className='info-container'>
-                <div className='info-container-video'>
-                    <video  autoPlay loop muted>
-                        <source src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/InfoPage%2F1475378_People_Family_Food_1920x1080.mp4?alt=media&token=99d65f37-4451-4057-ad92-a8b6c9db2f9a' type='video/mp4' />
-                    </video>
+                <div className='info-container-visual'>
+                    <AppImage src={media.food.restaurant} alt="Un espacio para compartir alrededor de la comida" />
                 </div>
                 <div className='info-container-title'>
                     <h1 className='info-container-title-h1' id="about-us">Conoce Rippio Food</h1>

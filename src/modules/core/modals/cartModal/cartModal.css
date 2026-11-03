@@ -48,7 +48,7 @@
     transition: .6s;
 }
 
-.ModalCart-content-item img{
+.ModalCart-content-item :is(img, svg){
     width: 5em;
     height: 5em;
     object-fit: cover;

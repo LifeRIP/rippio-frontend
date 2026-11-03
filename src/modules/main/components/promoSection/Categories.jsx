@@ -1,3 +1,4 @@
+import { AppImage } from '@m/core/components/appImage/AppImage';
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { CurveText } from "./CurveText";
@@ -15,7 +16,7 @@ export function Categories({items}){
                 <Link to={`allrestaurants/${item.title}`}
                 className="Categories-content-item" key={item.image}>
                     <CurveText>{item.title}</CurveText>
-                    <img draggable='false' className="Categories-content-item-img" src={item.image} alt={item.title} />
+                    <AppImage draggable='false' className="Categories-content-item-img" src={item.image} alt={item.title} />
                 </Link>
             ))}
         </section>

@@ -1,3 +1,5 @@
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import { useCart } from '@m/core/hooks/useCart';
 import Modal from 'react-modal';
 import './modalConflictProduct.css';
@@ -17,7 +19,7 @@ export const ModalConflictProduct = () => {
         <div>
             <Modal className='ModalConflictProduct Modal' isOpen={showModal} onRequestClose={toggleModal}>
                 <header className='ModalConflictProduct-header'>
-                    <img draggable='false' alt='rippioIcon' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FrippioFoodHappyIcon.png?alt=media&token=aadfafd8-dec8-43ae-847e-e46b3d44945a' />
+                    <AppImage kind="illustration" draggable='false' alt='rippioIcon' src={media.happy} />
                     {
                         cart.items.length > 0 ?
                             <h2>¡Espera! ¿Qué quieres comer?</h2>

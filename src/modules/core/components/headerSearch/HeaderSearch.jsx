@@ -1,3 +1,5 @@
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
 /* eslint-disable react/prop-types */
 import './headerSearch.css'
 
@@ -21,14 +23,14 @@ export default function HeaderSearch({ isCheckout = false }) {
 
     return (
         <header className='header'>
-            <img draggable='false' onClick={() => { navigate(`/`) }} alt='logo_rippio' className='header-img' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FrippioSimpleLogo.png?alt=media&token=5193a73b-7876-4531-b4ae-0e2098936a40' />
+            <AppImage kind="logo" draggable='false' onClick={() => { navigate(`/`) }} alt='logo_rippio' className='header-img' src={media.logo} />
             <form onSubmit={(e) => {
                 e.preventDefault;
                 search.trim() && navigate(`/searchpage/${search}`);
             }} className='header-form'>
                 <input onChange={(e) => { setSearch(e.target.value) }} className='header-form-text' type='text' placeholder='¡Encuentra tus restaurantes favoritos!' />
-                <button className='header-form-btn' type='submit'>
-                    <img className='header-form-btn-img' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FsearchIcon.png?alt=media&token=3c385ca2-5e59-4e6e-a2c0-b59e2142a3e3' />
+                <button aria-label='Buscar' className='header-form-btn' type='submit'>
+                    <AppImage className='header-form-btn-img' src={media.icons["search"]} />
                 </button>
             </form>
             <nav className='header-nav'>
@@ -41,9 +43,9 @@ export default function HeaderSearch({ isCheckout = false }) {
                                 className='header-li-link'>
                                 {
                                     cart.items.length > 0 ?
-                                        <img draggable='false' alt='cart' className='header-li-img' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FcartContainIcon.png?alt=media&token=a3667264-0a76-40ee-92cc-b2344651ab54' />
+                                        <AppImage draggable='false' alt='cart' className='header-li-img' src={media.icons["cart-full"]} />
                                         :
-                                        <img draggable='false' alt='cart' className='header-li-img' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FcartIcon.png?alt=media&token=8544fcaa-130f-4eea-9122-47ada0a95082' />
+                                        <AppImage draggable='false' alt='cart' className='header-li-img' src={media.icons["cart"]} />
                                 }
                             </button>
                         }
@@ -54,12 +56,12 @@ export default function HeaderSearch({ isCheckout = false }) {
                                 {
                                     isAuthenticated ?
                                         <>
-                                            <img draggable='false' alt='User' className='header-li-img header-li-img-userIcon' src={user.img_icon} />
+                                            <AppImage kind={user?.tipo_usuario === 3 ? "restaurant" : "avatar"} name={user?.nombre} draggable='false' alt='User' className='header-li-img header-li-img-userIcon' src={user.img_icon} />
                                             <span className='header-li-span'>{user.nombre}</span>
                                         </>
                                         :
                                         <>
-                                            <img draggable='false' alt='User' className='header-li-img header-li-img-userIcon' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FdefaultUserIcon.png?alt=media&token=4cf7ae75-e6ac-4fc4-b33f-e3d869739818' />
+                                            <AppImage draggable='false' alt='User' className='header-li-img header-li-img-userIcon' src={media.icons["user"]} />
                                             <span className='header-li-span'>Ingresa</span>
                                         </>
                                 }

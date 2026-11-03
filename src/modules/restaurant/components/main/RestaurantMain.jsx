@@ -1,3 +1,4 @@
+import { AppImage } from '@m/core/components/appImage/AppImage';
 /* eslint-disable react/prop-types */
 import './RestaurantMain.css'
 
@@ -27,7 +28,7 @@ export function RestaurantMain({ categories, restaurant, selectProduct, setModal
                                                             }
                                                         }
                                                     >
-                                                        <img draggable='false' src={product.img_product} alt={product.nombre} />
+                                                        <AppImage kind="product" name={product.nombre} category={category.nombre} draggable='false' src={product.img_product} alt={product.nombre} />
                                                         <div>
                                                             <h4>{product.nombre}</h4>
                                                             <p>{product.descripcion}</p>

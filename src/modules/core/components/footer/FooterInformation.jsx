@@ -1,3 +1,4 @@
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import { HashLink as Link } from 'react-router-hash-link';
 
 export function FooterInformation(){
@@ -73,7 +74,7 @@ export function FooterInformation(){
 
             </section>
             <section className="footer-basic">
-                <img className='footer-img' src="/icons/rippioFoodHappyIcon.png" draggable='false'></img>
+                <AppImage className='footer-img' src="/icons/rippioFoodHappyIcon.png" draggable='false'></AppImage>
                 <p className="footer-p">© 2024 Rippio. Todos los derechos reservados</p>
             </section>
         </>

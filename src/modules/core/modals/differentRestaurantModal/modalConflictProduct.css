@@ -11,7 +11,7 @@
     padding: 0.5em;
 }
 
-.ModalConflictProduct-header img{
+.ModalConflictProduct-header :is(img, svg){
     width: 3em;
 }
 

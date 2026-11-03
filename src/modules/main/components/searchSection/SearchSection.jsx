@@ -1,3 +1,5 @@
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
 /* eslint-disable react/prop-types */
 import './searchSection.css'
 import locationIcon from '/principalPage/icons/locationIcon.png';
@@ -22,7 +24,7 @@ export function SearchSection({location}) {
         <section className='SearchSection MainContent-bodySection-search'>
             <section className="firstSearchSection">
                 <header className="location">
-                    <img draggable='false' className='locationImg' src={locationIcon} alt="location"></img>
+                    <AppImage draggable='false' className='locationImg' src={locationIcon} alt="location"></AppImage>
                     <p>
                         {
                             location ?
@@ -49,17 +51,17 @@ export function SearchSection({location}) {
                             onChange={handleInputChange}
                         />
                         <button className='FormSearchBtn'>
-                            <img src={searchIcon} alt="searchIcon"></img>
+                            <AppImage src={searchIcon} alt="searchIcon"></AppImage>
                         </button>
                     </form>
                 </section>
             </section>
             <section className="secondSearchSection">
-                <img draggable='false'  className='secondSearchSection-img' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/HomePage%2FAnimationSearch%2Fburger.png?alt=media&token=81cb53a2-ee9e-4418-be80-371e72a3b4a4' alt="foodIcon"></img>
-                <img draggable='false' className='secondSearchSection-img' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/HomePage%2FAnimationSearch%2Fsalchipapa.png?alt=media&token=36fb0abf-cc9d-4275-b946-bf4538a29b7e' alt="foodIcon"></img>
-                <img draggable='false' className='secondSearchSection-img' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/HomePage%2FAnimationSearch%2Fburrito.png?alt=media&token=666db319-3c35-425b-b739-856ef91234c1' alt="foodIcon"></img>
-                <img draggable='false' className='secondSearchSection-img' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/HomePage%2FAnimationSearch%2Fsushi.png?alt=media&token=df46d08b-cae1-4661-800b-1ab28dd310fd' alt="foodIcon"></img>
-                <img draggable='false' className='secondSearchSection-img' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/HomePage%2FAnimationSearch%2Ffoodbackground.png?alt=media&token=c30f626c-43b4-474d-aedf-4ba8e3a1cf5d' alt="foodIcon"></img>
+                <AppImage draggable='false'  className='secondSearchSection-img' src={media.hero[0]} alt="foodIcon"></AppImage>
+                <AppImage draggable='false' className='secondSearchSection-img' src={media.hero[1]} alt="foodIcon"></AppImage>
+                <AppImage draggable='false' className='secondSearchSection-img' src={media.hero[2]} alt="foodIcon"></AppImage>
+                <AppImage draggable='false' className='secondSearchSection-img' src={media.hero[3]} alt="foodIcon"></AppImage>
+                <AppImage draggable='false' className='secondSearchSection-img' src={media.heroBackground} alt="foodIcon"></AppImage>
             </section>
         </section>
     )

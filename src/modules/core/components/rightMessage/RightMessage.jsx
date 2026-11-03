@@ -1,3 +1,4 @@
+import { AppImage } from '@m/core/components/appImage/AppImage';
 /* eslint-disable react/prop-types */
 import './rightMessage.css';
 
@@ -9,7 +10,7 @@ export default function RightMessage({ message, date, image }) {
                 <p className='ChatModal-body_message_right_text_content'>{message}</p>
                 <p className='ChatModal-body_message_right_text_hour'>{hour}</p>
             </div>
-            <img className='ChatModal-body_message_right_image' src={image} alt='User' />
+            <AppImage kind="avatar" className='ChatModal-body_message_right_image' src={image} alt='User' />
         </div>
     )
 }
