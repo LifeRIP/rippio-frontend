@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import Modal from 'react-modal'
 import './categoryDeleteModal.css'
 

@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react'
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
+import { useCallback, useEffect, useState } from 'react'
 import './restaurantProfileMenu.css'
-import uuid from 'react-uuid'
+
 import CategoryDeleteModal from '@m/core/modals/categoryDeleteModal/CategoryDeleteModal';
 import RestaurantProductModal from '@m/core/modals/RestaurantProductMenuModal/RestaurantProductMenuModal';
 import CategoriesAside from './CategoriesAside';
@@ -28,20 +30,6 @@ export function RestaurantProfileMenu() {
     const [file, setFile] = useState(null)
     const [loadingCategories, setLoadingCategories] = useState(true)
 
-    const addUniqueKeyToProducts = (categories) => {
-        const newCategories = categories.map(category => {
-            const newProducts = category.productos.map(product => {
-                product.uniqueKey = uuid()
-                return product
-            })
-            return {
-                ...category,
-                productos: newProducts
-            }
-        })
-        return newCategories
-    }
-
     const createMyFirstCategory = async () => {
         try {
             const res = await addSection(token, { nombre_seccion: 'Mi menú' })
@@ -60,36 +48,16 @@ export function RestaurantProfileMenu() {
 
     // GET CATEGORIES AND PRODUCTS
 
-    const getMyProducts = async () => {
-        try {
-            const res = await getProductsByResId(user.id)
-            setLoadingCategories(false)
-            if (res.data.length === 0) return
-
-            const categories = Object.keys(res.data).map(key => {
-                return {
-                    id: key,
-                    nombre: res.data[key].nombre,
-                    productos: Object.keys(res.data[key].productos).map(key2 => {
-                        return {
-                            ...res.data[key].productos[key2],
-                            id: key2
-                        }
-                    })
-                }
-            })
-
-            const categoriesUuid = addUniqueKeyToProducts(categories)
-            setCategories(categoriesUuid)
-        } catch (error) {
-            console.log(error);
-        }
-
-    }
+    const getMyProducts = useCallback(() => getProductsByResId(user.id).then(({ data }) => {
+        setCategories(Object.entries(data).map(([id, category]) => ({
+            id, nombre: category.nombre,
+            productos: Object.entries(category.productos).map(([id, product]) => ({ ...product, id, uniqueKey: crypto.randomUUID() })),
+        })));
+    }).catch(console.error).then(() => setLoadingCategories(false)), [user.id])
 
     useEffect(() => {
         getMyProducts()
-    }, [])
+    }, [getMyProducts])
 
     // CRUD CATEGORIES
 
@@ -132,7 +100,7 @@ export function RestaurantProfileMenu() {
             const newProduct = {
                 ...createdProduct,
                 id: res.data.response.id,
-                uniqueKey: uuid()
+                uniqueKey: crypto.randomUUID()
             }
             const newURL = await renameFile(`Products/${file.name}`, `Products/${res.data.response.id}.png`)
 
@@ -201,7 +169,7 @@ export function RestaurantProfileMenu() {
                     return {
                         ...category,
                         productos: [...category.productos, {
-                            uniqueKey: uuid(),
+                            uniqueKey: crypto.randomUUID(),
                             id: editedProduct.id,
                             disponible: editedProduct.disponible,
                             nombre: editedProduct.nombre,
@@ -222,18 +190,10 @@ export function RestaurantProfileMenu() {
         setIsModalEditProductOpen(false);
     }
 
-    useEffect(() => {
-        if (categories && selectedProduct) {
-            const categoriesFromProduct = categories.filter(category => category.productos.find(product => product.id == selectedProduct.id))
-
-            const productWithCategories = {
-                ...selectedProduct,
-                categories: categoriesFromProduct.map(category => category.id)
-            }
-
-            setEditedProduct(productWithCategories)
-        }
-    }, [selectedProduct, categories])
+    const selectProductForEditing = (product) => {
+        setSelectedProduct(product);
+        setEditedProduct({ ...product, categories: categories.filter(category => category.productos.some(item => item.id === product.id)).map(category => category.id) });
+    };
 
     const handleCancelModalEditProductClick = () => {
         setSelectedProduct(null)
@@ -275,13 +235,13 @@ export function RestaurantProfileMenu() {
                                             <section className='RestaurantProfileMenu-manage'>
 
                                                 <CategoriesAside categories={categories} setCategories={setCategories} setSelectedCategory={setSelectedCategory} setIsModalOpen={setIsModalCategoriesOpen} />
-                                                <RestaurantMenu setEditProduct={setEditedProduct} setIsModalEditProductOpen={setIsModalEditProductOpen} setSelectedProduct={setSelectedProduct} categories={categories} setCategories={setCategories} />
+                                                <RestaurantMenu setEditProduct={setEditedProduct} setIsModalEditProductOpen={setIsModalEditProductOpen} setSelectedProduct={selectProductForEditing} categories={categories} setCategories={setCategories} />
 
                                             </section>
                                         </section>
                                         :
                                         <section className="RestaurantProfileMenu-noProducts">
-                                            <img draggable='false' className='RestaurantProfileMenu-noProducts-img' src="https://static.vecteezy.com/system/resources/previews/036/512/636/non_2x/ai-generated-bowl-of-tasty-hot-pot-with-shrimps-on-transparent-background-png.png" alt="menu" />
+                                            <AppImage draggable='false' className='RestaurantProfileMenu-noProducts-img' src={media.icons.image} alt="menu" />
                                             <h1 >Menú</h1>
                                             <h2 >Empieza a crear tu menú con todo tipo de productos y categorías</h2>
                                             <button onClick={handleBeginCreatingProducts} className="RestaurantProfileMenu-noProducts-button">Iniciar</button>

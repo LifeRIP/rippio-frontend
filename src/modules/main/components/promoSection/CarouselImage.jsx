@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import { register } from 'swiper/element/bundle';
 import './carouselImage.css';
 // register Swiper custom elements
@@ -18,7 +18,14 @@ export function CarouselImage({ slides }) {
             >
                 {slides.map((slide) => (
                     <swiper-slide key={slide.image}>
-                        <img src={slide.image} alt={slide.title} />
+                        <div className="carousel-promotion">
+                            <AppImage src={slide.image} alt={slide.title} />
+                            <div className="carousel-promotion-copy">
+                                <span>Descubre nuevos sabores</span>
+                                <h3>{slide.title}</h3>
+                                <p>{slide.description}</p>
+                            </div>
+                        </div>
                     </swiper-slide>
                 ))}
             </swiper-container>

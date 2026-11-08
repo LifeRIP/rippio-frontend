@@ -38,7 +38,7 @@
     align-items: center;
 }
 
-.ProductModal-sectionImg img{
+.ProductModal-sectionImg :is(img, svg){
     width: 100%;
     height: 20em;
     object-fit: cover;

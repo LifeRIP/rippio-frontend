@@ -1,4 +1,5 @@
-/* eslint-disable react/prop-types */
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import { Link } from 'react-router-dom';
 
 export function Register({ userMode, text, setUserRegister, handleSubmitRegister, errors, handleRegisterClick, handleLoginClick, setUserLogin, handleSubmitLogin }) {
@@ -10,7 +11,7 @@ export function Register({ userMode, text, setUserRegister, handleSubmitRegister
                     className={`loginPage-form ${userMode ? 'user-mode' : 'non-user-mode'}`}>
                     <h2 className="loginPage-form-h2">{text.login.title_login}</h2>
                     <div className={`loginPage-form-input ${userMode ? 'user-mode' : 'non-user-mode'}`}>
-                        <i className="fas fa-user"></i>
+                        <AppImage src={media.icons.user} />
                         <input type="text" placeholder="Correo electrónico"
                             onChange={(e) => setUserLogin((user) => ({
                                 ...user,
@@ -19,7 +20,7 @@ export function Register({ userMode, text, setUserRegister, handleSubmitRegister
                         />
                     </div>
                     <div className="loginPage-form-input">
-                        <i className="fas fa-lock"></i>
+                        <AppImage src={media.icons.lock} />
                         <input type="password" placeholder="Contraseña"
                             onChange={(e) => setUserLogin((user) => ({
                                 ...user,
@@ -148,7 +149,7 @@ export function Register({ userMode, text, setUserRegister, handleSubmitRegister
                         <p>
                             {text.register.p_login}
                         </p>
-                        <img className='right-panel-image' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/LoginPage%2FDonutAnimation.png?alt=media&token=cd4285ad-cf40-42f4-a68e-eede58de09ec'></img>
+                        <AppImage className='right-panel-image' src={media.food.dessert}></AppImage>
                         <button
                             id="loginPage-button"
                             className="loginPage-button"
@@ -165,7 +166,7 @@ export function Register({ userMode, text, setUserRegister, handleSubmitRegister
                         <p>
                             {text.login.p_register}
                         </p>
-                        <img className='right-panel-image' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/LoginPage%2FSushiAnimation.png?alt=media&token=6712c17a-aa9c-4a54-92b8-7906fc053674'></img>
+                        <AppImage className='right-panel-image' src={media.hero[1]}></AppImage>
                         <button
                             id="registerPage-button"
                             className="registerPage-button"

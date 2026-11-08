@@ -127,7 +127,7 @@
     z-index: -1;
 }
 
-.buyPlanModal-buyContainer img {
+.buyPlanModal-buyContainer :is(img, svg) {
     width: 100%;
     height: auto;
 

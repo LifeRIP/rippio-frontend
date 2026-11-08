@@ -15,8 +15,10 @@ import { useCart } from '@m/core/hooks/useCart';
 export function SearchPage() {
     const params = useParams();
 
-    const [searchResults, setSearchResults] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [searchState, setSearchState] = useState({ query: null, results: [] });
+    const isLoading = searchState.query !== params.search;
+    const searchResults = isLoading ? [] : searchState.results;
+
     const [isOpen, setIsOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [RestaurantOfProduct, setRestaurantOfProduct] = useState(null);
@@ -27,20 +29,20 @@ export function SearchPage() {
     }, []);
 
     useEffect(() => {
-        setIsLoading(true);
+        let active = true;
         axios.get(`${import.meta.env.VITE_API_URL}/api/search`, {
             params: {
                 request: params.search
             }
         })
             .then(res => {
-                setSearchResults(res.data);
-                setIsLoading(false);
+                if (active) setSearchState({ query: params.search, results: res.data });
             })
             .catch(error => {
                 console.error(error);
-                setIsLoading(false);
+                if (active) setSearchState({ query: params.search, results: [] });
             });
+        return () => { active = false; };
     }, [params.search]);
 
     const addToCart = useCart((state) => state.addToCart)

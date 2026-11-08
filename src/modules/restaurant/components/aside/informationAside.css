@@ -74,7 +74,7 @@
     gap: 0.2em;
 }
 
-.RestaurantPage-content-aside-information-stats-rating img{
+.RestaurantPage-content-aside-information-stats-rating :is(img, svg){
     width: 1.1em;
     margin-bottom: 0.2em;
 }
@@ -109,7 +109,7 @@
     color: #000;
 }
 
-.RestaurantPage-content-aside-information-schedule-btn img{
+.RestaurantPage-content-aside-information-schedule-btn :is(img, svg){
     width: 1.3em;
 }
 

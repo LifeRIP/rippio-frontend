@@ -18,7 +18,7 @@
     flex-direction: column;
 }
 
-.send-email-container-title > img{
+.send-email-container-title > :is(img, svg){
     width: 8em;
     margin: .5em;
 }

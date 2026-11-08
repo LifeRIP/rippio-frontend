@@ -1,4 +1,6 @@
-/* eslint-disable react/prop-types */
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
+import { isChatConfigured } from '@m/core/apollo-client';
 import LeftMessage from '@m/core/components/leftMessage/LeftMessage';
 import RightMessage from '@m/core/components/rightMessage/RightMessage';
 import './chatModal.css';
@@ -7,11 +9,11 @@ import { useEffect } from 'react';
 import { useChatMutation, useChatQuery, useChatSubscription } from '../../hooks/custom-hooks';
 import { useAuth } from "@m/core/hooks/useAuth";
 
-export default function ChatModal({ isOpen, closeModal, order }) {
+function ConfiguredChatModal({ isOpen, closeModal, order }) {
     const user = useAuth((state) => state.user);
-    const { data, loading } = useChatQuery(order.id)
-    const { handleSendMessage, handleChange, message } = useChatMutation(order.id);
-    useChatSubscription(order.id);
+    const { data, loading, error: queryError } = useChatQuery(order.id)
+    const { handleSendMessage, handleChange, message, error: sendError, sending } = useChatMutation(order.id);
+    const { error: subscriptionError } = useChatSubscription(order.id);
 
     // Llevar el scroll del ChatModal-body al final
     useEffect(() => {
@@ -32,7 +34,7 @@ export default function ChatModal({ isOpen, closeModal, order }) {
                 className='ChatModal Modal'
             >
                 <header className='ChatModal-header'>
-                    <img className='ChatModal-header_image' src={order.img_icon} alt='Chat' />
+                    <AppImage kind="restaurant" name={order.nombre || order.name} className='ChatModal-header_image' src={order.img_icon} alt='Chat' />
                     {
                         user.tipo_usuario == 1 ?
                             <h3>{order.nombre}</h3>
@@ -48,16 +50,19 @@ export default function ChatModal({ isOpen, closeModal, order }) {
                     }
 
                     {loading && <p>Cargando mensajes ⌛</p>}
+                    {(queryError || sendError || subscriptionError) && (
+                        <p role='alert'>{sendError || queryError?.message || subscriptionError?.message}</p>
+                    )}
 
-                    {user.tipo_usuario == 3 && data && data.getchat_order.map((data, index) =>
+                    {user.tipo_usuario == 3 && data && data.getchat_order.map((data) =>
                     (data.tipo_usuario == 3 ?
-                        <RightMessage key={index} message={data.mensaje} date={data.fecha} image={data.img_icon} /> :
-                        <LeftMessage key={index} message={data.mensaje} date={data.fecha} image={data.img_icon} />))}
+                        <RightMessage key={data.id} message={data.mensaje} date={data.fecha} image={data.img_icon} /> :
+                        <LeftMessage key={data.id} message={data.mensaje} date={data.fecha} image={data.img_icon} />))}
 
-                    {user.tipo_usuario == 1 && data && data.getchat_order.map((data, index) =>
+                    {user.tipo_usuario == 1 && data && data.getchat_order.map((data) =>
                     (data.tipo_usuario == 1 ?
-                        <RightMessage key={index} message={data.mensaje} date={data.fecha} image={data.img_icon} /> :
-                        <LeftMessage key={index} message={data.mensaje} date={data.fecha} image={data.img_icon} />))}
+                        <RightMessage key={data.id} message={data.mensaje} date={data.fecha} image={data.img_icon} /> :
+                        <LeftMessage key={data.id} message={data.mensaje} date={data.fecha} image={data.img_icon} />))}
 
                 </section>
                 <footer className='ChatModal-footer'>
@@ -66,10 +71,10 @@ export default function ChatModal({ isOpen, closeModal, order }) {
                             onSubmit={handleSendMessage}
                         >
                             <input className='ChatModal-footer_input' type='text' placeholder='Escribe un mensaje...'
-                                onChange={handleChange} value={message}
+                                onChange={handleChange} value={message} disabled={sending}
                             />
-                            <button className='ChatModal-footer_button'>
-                                <img className='ChatModal-footer_button_image' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FsendIcon.png?alt=media&token=7d5c3f4d-08d5-42a8-8744-4e5cf8777b09' alt='Enviar' />
+                            <button className='ChatModal-footer_button' disabled={sending || !message.trim()}>
+                                <AppImage className='ChatModal-footer_button_image' src={media.icons["send"]} alt='Enviar' />
                             </button>
                         </form>
                         : <p className='ChatModal-footer_message'>La conversación ha finalizado. El estado de la orden es {order.estado}</p>
@@ -78,4 +83,19 @@ export default function ChatModal({ isOpen, closeModal, order }) {
             </Modal>
         </div>
     )
+}
+export default function ChatModal(props) {
+    if (!props.isOpen || !props.order) return null;
+    if (isChatConfigured) return <ConfiguredChatModal {...props} />;
+    return (
+        <Modal isOpen={props.isOpen} onRequestClose={props.closeModal} className='ChatModal Modal'>
+            <header className='ChatModal-header'>
+                <h3>Chat no disponible</h3>
+                <button onClick={props.closeModal} aria-label='Cerrar chat'>X</button>
+            </header>
+            <section className='ChatModal-body'>
+                <p>El servicio de mensajes todavía no está configurado.</p>
+            </section>
+        </Modal>
+    );
 }

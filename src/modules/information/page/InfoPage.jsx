@@ -1,4 +1,5 @@
-/* eslint-disable react/no-unescaped-entities */
+import { AppImage } from '@m/core/components/appImage/AppImage';
+import { media } from '@m/core/utils/media';
 // import { Link } from 'react-router-dom';
 import HeaderNav  from '@m/core/components/headerNav/HeaderNav';
 import { Footer } from '@m/core/components/footer/Footer';
@@ -17,10 +18,8 @@ export function InfoPage() {
         <div className='background-container'>
             <HeaderNav />
             <div className='info-container'>
-                <div className='info-container-video'>
-                    <video  autoPlay loop muted>
-                        <source src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/InfoPage%2F1475378_People_Family_Food_1920x1080.mp4?alt=media&token=99d65f37-4451-4057-ad92-a8b6c9db2f9a' type='video/mp4' />
-                    </video>
+                <div className='info-container-visual'>
+                    <AppImage src={media.food.restaurant} alt="Un espacio para compartir alrededor de la comida" />
                 </div>
                 <div className='info-container-title'>
                     <h1 className='info-container-title-h1' id="about-us">Conoce Rippio Food</h1>
@@ -31,7 +30,7 @@ export function InfoPage() {
                 <div className='info-container-mision'>
                     <h2 className='info-container-mision-h2'>¿Cuál es nuestra Misión?</h2>
                     <p className='info-container-mision-p'>Nuestra aplicación fue creada en 2024 en la vibrante ciudad de Tuluá, con la misión de
-                                transformar la experiencia gastronómica y brindar beneficios tanto a los usuarios como a los establecimientos culinarios.En Rippio Food, nos comprometemos a ofrecer una plataforma confiable y eficiente que mejore la vida de nuestros usuarios y apoye el crecimiento de los restaurantes
+                                transformar la experiencia gastronómica y brindar beneficios tanto a los usuarios como a los establecimientos culinarios. En Rippio Food, nos comprometemos a ofrecer una plataforma confiable y eficiente que mejore la vida de nuestros usuarios y apoye el crecimiento de los restaurantes
                             locales. Creemos en la transparencia como un pilar fundamental, y trabajamos arduamente para proteger los intereses de nuestros consumidores y socios comerciales.</p>
 
                     <h2 className='info-container-mision-h2'>Transparencia y confianza</h2>

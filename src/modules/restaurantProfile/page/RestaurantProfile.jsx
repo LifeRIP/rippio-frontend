@@ -1,3 +1,5 @@
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import { Footer } from "@m/core/components/footer/Footer";
 import HeaderNav from "@m/core/components/headerNav/HeaderNav";
 import { Outlet } from 'react-router-dom';
@@ -61,18 +63,18 @@ export function RestaurantProfile() {
                         <header className="ProfileRestaurantOptions-header">
 
                             <div className="ProfileRestaurantOptionsContainer-uploadBannerContainer">
-                                <img
+                                <AppImage kind="banner" name={user.nombre}
                                     className={loading ? "ProfileRestaurantOptions-header-banner loading" : "ProfileRestaurantOptions-header-banner"}
                                     id="ProfileRestauran-imgProfile"
                                     draggable='false'
-                                    src={loading ? 'https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2Floading.png?alt=media&token=b1a554d7-4784-4f3c-892b-662ff72a3804' : user.img_banner}
+                                    src={loading ? media.icons["loader"] : user.img_banner}
                                     alt="banner"
                                 />
                                 <label className="hidden-label" htmlFor="upload">Subir imagen:</label>
                                 <input type="file" id="uploadBanner" name="uploadBanner" accept=".png, .jpg, .jpeg"
                                     onChange={handleInputProfileBannerChange} />
                                 <button className="ProfileRestaurantOptions-header-button" onClick={handleButtonBannerClick}>
-                                    <img draggable='false' className="ProfileRestaurantOptions-header-imgEditBanner" src="https://icons.veryicon.com/png/o/miscellaneous/linear-small-icon/edit-246.png" alt="Upload Icon" />
+                                    <AppImage draggable='false' className="ProfileRestaurantOptions-header-imgEditBanner" src={media.icons.edit} alt="Upload Icon" />
                                 </button>
                             </div>
 

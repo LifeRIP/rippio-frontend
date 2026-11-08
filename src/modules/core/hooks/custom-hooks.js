@@ -3,7 +3,7 @@ import {
   useMutation,
   useQuery,
   useSubscription,
-} from "@apollo/client";
+} from "@apollo/client/react";
 import { useAuth } from "@m/core/hooks/useAuth";
 import { useState } from "react";
 import { getOrderDetailByID } from "@/api/order";
@@ -13,7 +13,7 @@ import { POST_MESSAGE_IN_ORDER_ID } from "../Chat/graphql-mutations";
 import { SUSCRIBE_BY_ORDER_ID } from "../Chat/graphql-subscription";
 
 
-import { getUserData } from '@/api/auth.jsx';
+import { getUserData } from '@/api/auth.js';
 import { useCart } from '@m/core/hooks/useCart';
 
 export const useDetailOrderModal = (order) => {
@@ -68,8 +68,7 @@ export const useDetailOrderModal = (order) => {
           });
       }
     },
-    [order],
-    []
+    [order]
   );
 
   const setNull = () => {
@@ -81,138 +80,78 @@ export const useDetailOrderModal = (order) => {
   return { products, direction, paymentMethod, loading, setNull };
 };
 
+function cacheMessage(client, id, token, message) {
+  if (!message) return;
+  client.cache.updateQuery({
+    query: GET_MESSAGES_BY_ORDER_ID,
+    variables: { idPedido: id, token },
+  }, (data) => ({ getchat_order: [...(data?.getchat_order || []), message] }));
+}
+
 export const useChatQuery = (id) => {
   const token = useAuth((state) => state.token);
-  const result = useQuery(GET_MESSAGES_BY_ORDER_ID, {
-    variables: { idPedido: id, token: token },
-    onError: (err) => {
-      console.log(err);
-    },
+  return useQuery(GET_MESSAGES_BY_ORDER_ID, {
+    variables: { idPedido: id, token },
+    skip: !id || !token,
+    fetchPolicy: 'cache-and-network',
+    // Also recovers any messages missed while the socket was unavailable.
+    pollInterval: 15000,
   });
-  return result;
 };
 
 export const useChatMutation = (id) => {
   const token = useAuth((state) => state.token);
-
-  const [message, setMessage] = useState("");
+  const client = useApolloClient();
+  const [message, setMessage] = useState('');
   const [error, setError] = useState(null);
-  const [sending, setSending] = useState(false);
-
-  const [createMessage] = useMutation(POST_MESSAGE_IN_ORDER_ID, {
-    onError: (err) => {
-      setError("Error al enviar el mensaje");
-      console.log(err);
-    },
-  });
-
-  useEffect(() => {
-    if (error) {
-      setTimeout(() => {
-        setError(null);
-      }, 5000);
-    }
-  }, [error]);
-
-  const handleChange = (e) => {
-    setMessage(e.target.value);
-  };
+  const [createMessage, { loading: sending }] = useMutation(POST_MESSAGE_IN_ORDER_ID);
+  const handleChange = (e) => setMessage(e.target.value);
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (sending) return;
-    setSending(true);
-    if (!message) return;
+    const text = message.trim();
+    if (sending || !text) return;
+    setError(null);
     try {
-      setMessage("");
-      await createMessage(
-        {
-          variables: {
-            idPedido: id,
-            mensaje: message,
-            fecha: new Date().toISOString(),
-            token: token,
-          },
-        },
-        {
-          onError: (err) => {
-            setError("Error al enviar el mensaje");
-            console.log(err);
-          },
-        }
-      );
-    } catch (error) {
-      setError(error);
-      console.log(error);
+      const result = await createMessage({
+        variables: { idPedido: id, mensaje: text, fecha: new Date().toISOString(), token },
+      });
+      cacheMessage(client, id, token, result.data.insertchat_order);
+      setMessage('');
+    } catch (err) {
+      setError(err.message || 'Error al enviar el mensaje. Intenta nuevamente.');
     }
-    setSending(false);
   };
-
-  return { handleSendMessage, error, handleChange, message };
+  return { handleSendMessage, error, handleChange, message, sending };
 };
 
 export const useChatSubscription = (id) => {
   const client = useApolloClient();
   const token = useAuth((state) => state.token);
   const user = useAuth((state) => state.user);
-
-  // Solicitar permiso de notificación
-  const requestNotificationPermission = async () => {
-    if (Notification.permission === "default") {
-      await Notification.requestPermission();
-    }
-  };
-
-  useEffect(() => {
-    requestNotificationPermission();
-  }, []);
-
-  const showNotification = (message) => {
-    if (Notification.permission === "granted") {
-      new Notification("Nuevo mensaje", {
-        body: message,
-      });
-    }
-  };
-
-  useSubscription(SUSCRIBE_BY_ORDER_ID, {
-    variables: { idPedido: id },
-    onData: async ({ data }) => {
-      const listenOrderMessages = data.data.listenOrderMessages;
-      const dataInStore = client.readQuery({
-        query: GET_MESSAGES_BY_ORDER_ID,
-        variables: { idPedido: id, token: token },
-      });
-
-      // Mostrar notificación
-      if (listenOrderMessages.tipo_usuario != user.tipo_usuario) {
-        showNotification(listenOrderMessages.mensaje);
+  return useSubscription(SUSCRIBE_BY_ORDER_ID, {
+    variables: { idPedido: id, token },
+    skip: !id || !token,
+    onData: ({ data }) => {
+      const message = data.data?.listenOrderMessages;
+      cacheMessage(client, id, token, message);
+      if (message && message.tipo_usuario !== user?.tipo_usuario &&
+          typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+        new Notification('Nuevo mensaje', { body: message.mensaje });
       }
-
-      client.writeQuery({
-        query: GET_MESSAGES_BY_ORDER_ID,
-        variables: { idPedido: id, token: token },
-        data: {
-          ...dataInStore,
-          getchat_order: [...dataInStore.getchat_order, listenOrderMessages],
-        },
-      });
     },
   });
 };
-
 export const useStart = () => {
-  const user = useAuth((state) => state.user);
+  const userId = useAuth((state) => state.user?.id);
+  const token = useAuth((state) => state.token);
   const setUser = useAuth((state) => state.setUser);
   const isAuthenticated = useAuth((state) => state.isAuthenticated);
-  const fix = window.localStorage.getItem("fix6") == "true";
-  const white = window.localStorage.getItem("white") == "true";
-
-  const { loadCartFromLocalStorage, loadCartFromDatabase, setTokenInCart } =
-    useCart();
+  const loadCartFromLocalStorage = useCart((state) => state.loadCartFromLocalStorage);
+  const loadCartFromDatabase = useCart((state) => state.loadCartFromDatabase);
+  const setTokenInCart = useCart((state) => state.setTokenInCart);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     if (token) {
       console.log("cargada de database");
       setTokenInCart(token);
@@ -221,17 +160,20 @@ export const useStart = () => {
       setTokenInCart(null);
       loadCartFromLocalStorage();
     }
-  }, []);
-
-  const updateUserData = async () => {
-    const newUser = await getUserData(user.id);
-    setUser(newUser.data[0]);
-  };
+  }, [token, loadCartFromDatabase, loadCartFromLocalStorage, setTokenInCart]);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      updateUserData();
-    }
+    if (!isAuthenticated || !userId) return;
+    let active = true;
+    getUserData(userId).then(({ data }) => {
+      if (active) setUser(data[0]);
+    }).catch(console.error);
+    return () => { active = false; };
+  }, [isAuthenticated, userId, setUser]);
+
+  useEffect(() => {
+    const fix = window.localStorage.getItem('fix6') === 'true';
+    const white = window.localStorage.getItem('white') === 'true';
     if (!fix) {
       window.localStorage.clear();
       window.localStorage.setItem("fix6", "true");

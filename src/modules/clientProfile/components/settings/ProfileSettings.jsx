@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import './profileSettings.css'
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -7,6 +8,8 @@ import axios from 'axios';
 
 
 export function ProfileSettings() {
+    const primaryTooltipRef = useRef(null);
+
     const user = useAuth((state) => state.user);
     const token = useAuth((state) => state.token);
     const setUser = useAuth((state) => state.setUser);
@@ -77,10 +80,9 @@ export function ProfileSettings() {
                 </div>
                 <div>
                     <label htmlFor="email">Correo electrónico</label>
-                    <Tippy content='Para cambiar la dirección de correo electrónico, por favor ponte en contacto con el soporte'>
-                        <input className='block-input ProfileSettingsInput' readOnly type="email" id="email" name="email"
+                    <input ref={primaryTooltipRef} className='block-input ProfileSettingsInput' readOnly type="email" id="email" name="email"
                             value={user.email} />
-                    </Tippy>
+                        <Tippy content='Para cambiar la dirección de correo electrónico, por favor ponte en contacto con el soporte' reference={primaryTooltipRef} />
                 </div>
                 <div>
                     <label htmlFor="phone">Teléfono</label>

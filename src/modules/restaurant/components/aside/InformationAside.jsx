@@ -1,4 +1,5 @@
-/* eslint-disable react/prop-types */
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import { useEffect, useState } from 'react';
 import './informationAside.css'
 
@@ -8,8 +9,8 @@ export function InformationAside({ name, direction, schedule, rating, logo, bann
     const [showSchedule, setShowSchedule] = useState(true);
 
     const handleShowSchedule = () => {
-        schedule = document.querySelector('.RestaurantPage-content-aside-information-schedule-days');
-        schedule.classList.toggle('RestaurantPage-content-aside-information-schedule-days-active');
+        const scheduleElement = document.querySelector('.RestaurantPage-content-aside-information-schedule-days');
+        scheduleElement.classList.toggle('RestaurantPage-content-aside-information-schedule-days-active');
         setShowSchedule(!showSchedule);
     }
 
@@ -37,9 +38,9 @@ export function InformationAside({ name, direction, schedule, rating, logo, bann
                     ?
                     <section className='RestaurantPage-content-aside-presentation'>
                         <div className='aside-presentation-bannerAndLogo'>
-                            <img draggable='false' className='aside-presentation-banner' src={banner} alt='Banner'></img>
+                            <AppImage kind="banner" name={name} draggable='false' className='aside-presentation-banner' src={banner} alt='Banner'></AppImage>
                             <div>
-                                <img draggable='false' className='aside-presentation-logo' src={logo} alt='Logo'></img>
+                                <AppImage kind="restaurant" draggable='false' className='aside-presentation-logo' src={logo} alt='Logo'></AppImage>
                                 <h1 className='aside-presentation-name'>{name}</h1>
                             </div>
                         </div>
@@ -47,8 +48,8 @@ export function InformationAside({ name, direction, schedule, rating, logo, bann
                     :
                     <section className='RestaurantPage-content-aside-presentation'>
                         <div className='aside-presentation-bannerAndLogo'>
-                            <img draggable='false' className='aside-presentation-banner' src={banner} alt='Banner'></img>
-                            <img draggable='false' className='aside-presentation-logo' src={logo} alt='Logo'></img>
+                            <AppImage kind="banner" name={name} draggable='false' className='aside-presentation-banner' src={banner} alt='Banner'></AppImage>
+                            <AppImage kind="restaurant" draggable='false' className='aside-presentation-logo' src={logo} alt='Logo'></AppImage>
                         </div>
                         <h1 className='aside-presentation-name'>{name}</h1>
                     </section>
@@ -59,7 +60,7 @@ export function InformationAside({ name, direction, schedule, rating, logo, bann
                     <div>Delivery <span>10 min</span></div>
                     <div>Envío <span>$3000</span></div>
                     <div>Calificación <span className='RestaurantPage-content-aside-information-stats-rating'>
-                    <img src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2Fstar.png?alt=media&token=3b3b3b7b-4b3b-4b3b-8b3b-3b3b3b3b3b3b' alt='Star'></img>
+                    <AppImage src={media.icons["star"]} alt='Star'></AppImage>
                     {rating}</span></div>
                 </section>
                 <section className='RestaurantPage-content-aside-information-schedule'>
@@ -71,11 +72,11 @@ export function InformationAside({ name, direction, schedule, rating, logo, bann
                         {
                             isScreenSmall
                                 ? showSchedule
-                                    ? <img src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FupArrow.png?alt=media&token=9a1a8d3a-4d3a-4e0c-9e3a-0e8c9a1b3f7d' alt='Arrow'></img>
-                                    : <img src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FdownArrow.png?alt=media&token=2eb9a78a-94b0-4c11-b2c0-41788a4f46cc' alt='Arrow'></img>
+                                    ? <AppImage src={media.icons["chevron-up"]} alt='Arrow'></AppImage>
+                                    : <AppImage src={media.icons["chevron-down"]} alt='Arrow'></AppImage>
                                 : showSchedule
-                                    ? <img src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FupArrow.png?alt=media&token=9a1a8d3a-4d3a-4e0c-9e3a-0e8c9a1b3f7d' alt='Arrow'></img>
-                                    : <img src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FdownArrow.png?alt=media&token=2eb9a78a-94b0-4c11-b2c0-41788a4f46cc' alt='Arrow'></img>
+                                    ? <AppImage src={media.icons["chevron-up"]} alt='Arrow'></AppImage>
+                                    : <AppImage src={media.icons["chevron-down"]} alt='Arrow'></AppImage>
                         }
                     </button>
                     <div className={
@@ -88,9 +89,9 @@ export function InformationAside({ name, direction, schedule, rating, logo, bann
                     >
                         {
                             schedule
-                                ? schedule.map((day, index) => {
+                                ? schedule.map((day) => {
                                     return (
-                                        <div className='RestaurantPage-content-aside-information-schedule-day' key={index}>
+                                        <div className='RestaurantPage-content-aside-information-schedule-day' key={day.day}>
 
                                             {
                                                 (day.open === '00:00' && day.close === '00:00')

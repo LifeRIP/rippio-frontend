@@ -1,4 +1,5 @@
-/* eslint-disable react/prop-types */
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import { Link } from 'react-router-dom';
 import './change.css'
 import { useState } from 'react';
@@ -48,13 +49,13 @@ export function Change({ token }) {
                 {
                     success ?
                         <>
-                            <img src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/LoginPage%2FRippioHappy.png?alt=media&token=0dc72f88-d0da-446d-9a8e-70165ba3983c'></img>
+                            <AppImage kind="illustration" src={media.mascot}></AppImage>
                             <h1 className='chg-title'>¡Contraseña cambiada!</h1>
                             <p className='chg-text'>Tu contraseña ha sido cambiada exitosamente, ahora puedes iniciar sesión con tu nueva contraseña.</p>
                         </>
                         :
                         <>
-                            <img src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/LoginPage%2FRippioHappy.png?alt=media&token=0dc72f88-d0da-446d-9a8e-70165ba3983c'></img>
+                            <AppImage kind="illustration" src={media.mascot}></AppImage>
                             <h1 className='chg-title'>Cambia tu contraseña</h1>
                             <p className='chg-text'>Ingresa tu nueva contraseña, recuerda elegir una contraseña segura para proteger tu información.</p>
                             <form

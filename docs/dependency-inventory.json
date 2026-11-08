@@ -1,0 +1,766 @@
+[
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "@apollo/client",
+    "previousRange": "^3.11.8",
+    "previousInstalled": "3.11.8",
+    "latest": "4.3.7",
+    "action": "update",
+    "peerDependencies": {
+      "rxjs": "^7.3.0",
+      "react": "^17.0.0 || ^18.0.0 || >=19.0.0-rc",
+      "graphql": "^16.0.0 || ^17.0.0",
+      "react-dom": "^17.0.0 || ^18.0.0 || >=19.0.0-rc",
+      "graphql-ws": "^5.5.5 || ^6.0.3",
+      "subscriptions-transport-ws": "^0.9.0 || ^0.11.0"
+    },
+    "peerDependenciesMeta": {
+      "react": {
+        "optional": true
+      },
+      "react-dom": {
+        "optional": true
+      },
+      "graphql-ws": {
+        "optional": true
+      },
+      "subscriptions-transport-ws": {
+        "optional": true
+      }
+    },
+    "finalRange": "^4.3.7",
+    "finalGroup": "dependencies",
+    "finalVersion": "4.3.7"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "@emotion/react",
+    "previousRange": "^11.11.4",
+    "previousInstalled": "11.11.4",
+    "latest": "11.14.0",
+    "action": "update",
+    "peerDependencies": {
+      "react": ">=16.8.0"
+    },
+    "peerDependenciesMeta": {
+      "@types/react": {
+        "optional": true
+      }
+    },
+    "finalRange": "^11.14.0",
+    "finalGroup": "dependencies",
+    "finalVersion": "11.14.0"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "@emotion/styled",
+    "previousRange": "^11.11.5",
+    "previousInstalled": "11.11.5",
+    "latest": "11.14.1",
+    "action": "update",
+    "peerDependencies": {
+      "react": ">=16.8.0",
+      "@emotion/react": "^11.0.0-rc.0"
+    },
+    "peerDependenciesMeta": {
+      "@types/react": {
+        "optional": true
+      }
+    },
+    "finalRange": "^11.14.1",
+    "finalGroup": "dependencies",
+    "finalVersion": "11.14.1"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "@mui/material",
+    "previousRange": "^5.15.15",
+    "previousInstalled": "5.15.15",
+    "latest": "9.5.0",
+    "action": "update",
+    "peerDependencies": {
+      "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+      "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0",
+      "@types/react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+      "@emotion/react": "^11.5.0",
+      "@emotion/styled": "^11.3.0",
+      "@mui/material-pigment-css": "^9.5.0"
+    },
+    "peerDependenciesMeta": {
+      "@types/react": {
+        "optional": true
+      },
+      "@emotion/react": {
+        "optional": true
+      },
+      "@emotion/styled": {
+        "optional": true
+      },
+      "@mui/material-pigment-css": {
+        "optional": true
+      }
+    },
+    "finalRange": "^9.5.0",
+    "finalGroup": "dependencies",
+    "finalVersion": "9.5.0"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "@tippyjs/react",
+    "previousRange": "^4.2.6",
+    "previousInstalled": "4.2.6",
+    "latest": "4.2.6",
+    "action": "unchanged",
+    "peerDependencies": {
+      "react": ">=16.8",
+      "react-dom": ">=16.8"
+    },
+    "peerDependenciesMeta": null,
+    "finalRange": "^4.2.6",
+    "finalGroup": "dependencies",
+    "finalVersion": "4.2.6"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "axios",
+    "previousRange": "^1.6.8",
+    "previousInstalled": "1.20.0",
+    "latest": "1.21.0",
+    "action": "update",
+    "peerDependencies": null,
+    "peerDependenciesMeta": null,
+    "finalRange": "^1.21.0",
+    "finalGroup": "dependencies",
+    "finalVersion": "1.21.0"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "chart.js",
+    "previousRange": "^4.4.7",
+    "previousInstalled": "4.4.7",
+    "latest": "4.6.1",
+    "action": "update",
+    "peerDependencies": null,
+    "peerDependenciesMeta": null,
+    "finalRange": "^4.6.1",
+    "finalGroup": "dependencies",
+    "finalVersion": "4.6.1"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "firebase",
+    "previousRange": "^10.11.1",
+    "previousInstalled": "10.14.1",
+    "latest": "13.2.0",
+    "action": "update",
+    "peerDependencies": null,
+    "peerDependenciesMeta": null,
+    "finalRange": "^13.2.0",
+    "finalGroup": "dependencies",
+    "finalVersion": "13.2.0"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "graphql",
+    "previousRange": "^16.9.0",
+    "previousInstalled": "16.9.0",
+    "latest": "17.1.0",
+    "action": "update",
+    "peerDependencies": null,
+    "peerDependenciesMeta": null,
+    "finalRange": "^17.1.0",
+    "finalGroup": "dependencies",
+    "finalVersion": "17.1.0"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "graphql-ws",
+    "previousRange": "^5.16.0",
+    "previousInstalled": "5.16.0",
+    "latest": "6.4.1",
+    "action": "update",
+    "peerDependencies": {
+      "ws": "^8",
+      "crossws": "~0.3 || ~0.4",
+      "graphql": "^15.10.1 || ^16 || ^17",
+      "@fastify/websocket": "^10 || ^11"
+    },
+    "peerDependenciesMeta": {
+      "ws": {
+        "optional": true
+      },
+      "crossws": {
+        "optional": true
+      },
+      "@fastify/websocket": {
+        "optional": true
+      }
+    },
+    "finalRange": "^6.4.1",
+    "finalGroup": "dependencies",
+    "finalVersion": "6.4.1"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "html2canvas",
+    "previousRange": "^1.4.1",
+    "previousInstalled": "1.4.1",
+    "latest": "1.4.1",
+    "action": "unchanged",
+    "peerDependencies": null,
+    "peerDependenciesMeta": null,
+    "finalRange": "^1.4.1",
+    "finalGroup": "dependencies",
+    "finalVersion": "1.4.1"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "jspdf",
+    "previousRange": "^2.5.2",
+    "previousInstalled": "2.5.2",
+    "latest": "4.2.1",
+    "action": "update",
+    "peerDependencies": null,
+    "peerDependenciesMeta": null,
+    "finalRange": "^4.2.1",
+    "finalGroup": "dependencies",
+    "finalVersion": "4.2.1"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "lucide-react",
+    "previousRange": "^1.66.0",
+    "previousInstalled": "1.66.0",
+    "latest": "1.69.0",
+    "action": "update",
+    "peerDependencies": {
+      "react": "^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+      "@types/react": "*"
+    },
+    "peerDependenciesMeta": {
+      "@types/react": {
+        "optional": true
+      }
+    },
+    "finalRange": "^1.69.0",
+    "finalGroup": "dependencies",
+    "finalVersion": "1.69.0"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "normalize.css",
+    "previousRange": "^8.0.1",
+    "previousInstalled": "8.0.1",
+    "latest": "8.0.1",
+    "action": "unchanged",
+    "peerDependencies": null,
+    "peerDependenciesMeta": null,
+    "finalRange": "^8.0.1",
+    "finalGroup": "dependencies",
+    "finalVersion": "8.0.1"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "react",
+    "previousRange": "^18.2.0",
+    "previousInstalled": "18.2.0",
+    "latest": "19.3.1",
+    "action": "update",
+    "peerDependencies": null,
+    "peerDependenciesMeta": null,
+    "finalRange": "^19.3.1",
+    "finalGroup": "dependencies",
+    "finalVersion": "19.3.1"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "react-chartjs-2",
+    "previousRange": "^5.2.0",
+    "previousInstalled": "5.2.0",
+    "latest": "5.3.1",
+    "action": "update",
+    "peerDependencies": {
+      "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+      "chart.js": "^4.1.1"
+    },
+    "peerDependenciesMeta": null,
+    "finalRange": "^5.3.1",
+    "finalGroup": "dependencies",
+    "finalVersion": "5.3.1"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "react-dom",
+    "previousRange": "^18.2.0",
+    "previousInstalled": "18.2.0",
+    "latest": "19.3.1",
+    "action": "update",
+    "peerDependencies": {
+      "react": "^19.3.1"
+    },
+    "peerDependenciesMeta": null,
+    "finalRange": "^19.3.1",
+    "finalGroup": "dependencies",
+    "finalVersion": "19.3.1"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "react-modal",
+    "previousRange": "^3.16.1",
+    "previousInstalled": "3.16.1",
+    "latest": "3.16.3",
+    "action": "update",
+    "peerDependencies": {
+      "react": "^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18 || ^19",
+      "react-dom": "^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18 || ^19"
+    },
+    "peerDependenciesMeta": null,
+    "finalRange": "^3.16.3",
+    "finalGroup": "dependencies",
+    "finalVersion": "3.16.3"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "react-router-dom",
+    "previousRange": "^6.23.1",
+    "previousInstalled": "6.30.6",
+    "latest": "7.18.5",
+    "action": "update",
+    "peerDependencies": {
+      "react": ">=18",
+      "react-dom": ">=18"
+    },
+    "peerDependenciesMeta": null,
+    "finalRange": "^7.18.5",
+    "finalGroup": "dependencies",
+    "finalVersion": "7.18.5"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "react-router-hash-link",
+    "previousRange": "^2.4.3",
+    "previousInstalled": "2.4.3",
+    "latest": "2.4.3",
+    "action": "unchanged",
+    "peerDependencies": {
+      "react": ">=15",
+      "react-router-dom": ">=4"
+    },
+    "peerDependenciesMeta": null,
+    "finalRange": "^2.4.3",
+    "finalGroup": "dependencies",
+    "finalVersion": "2.4.3"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "react-select",
+    "previousRange": "^5.8.0",
+    "previousInstalled": "5.8.0",
+    "latest": "5.10.2",
+    "action": "update",
+    "peerDependencies": {
+      "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+      "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
+    },
+    "peerDependenciesMeta": null,
+    "finalRange": "^5.10.2",
+    "finalGroup": "dependencies",
+    "finalVersion": "5.10.2"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "react-uuid",
+    "previousRange": "^2.0.0",
+    "previousInstalled": "2.0.0",
+    "latest": "2.0.0",
+    "action": "remove",
+    "peerDependencies": null,
+    "peerDependenciesMeta": null,
+    "finalRange": null,
+    "finalGroup": null,
+    "finalVersion": null
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "subscriptions-transport-ws",
+    "previousRange": "^0.11.0",
+    "previousInstalled": "0.11.0",
+    "latest": "0.11.0",
+    "action": "remove",
+    "peerDependencies": {
+      "graphql": "^15.7.2 || ^16.0.0"
+    },
+    "peerDependenciesMeta": null,
+    "finalRange": null,
+    "finalGroup": null,
+    "finalVersion": null
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "swiper",
+    "previousRange": "^11.1.0",
+    "previousInstalled": "11.2.10",
+    "latest": "14.4.0",
+    "action": "update",
+    "peerDependencies": null,
+    "peerDependenciesMeta": null,
+    "finalRange": "^14.4.0",
+    "finalGroup": "dependencies",
+    "finalVersion": "14.4.0"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "vite-plugin-pwa",
+    "previousRange": "^0.20.3",
+    "previousInstalled": "0.20.5",
+    "latest": "2.0.0",
+    "action": "update",
+    "peerDependencies": {
+      "vite": "^3.1.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0",
+      "workbox-build": "^7.4.1",
+      "workbox-window": "^7.4.1",
+      "@vite-pwa/assets-generator": "^1.0.0 || ^2.0.0"
+    },
+    "peerDependenciesMeta": {
+      "@vite-pwa/assets-generator": {
+        "optional": true
+      }
+    },
+    "finalRange": "^2.0.0",
+    "finalGroup": "dependencies",
+    "finalVersion": "2.0.0"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "zustand",
+    "previousRange": "^4.5.2",
+    "previousInstalled": "4.5.2",
+    "latest": "5.0.16",
+    "action": "update",
+    "peerDependencies": {
+      "immer": ">=9.0.6",
+      "react": ">=18.0.0",
+      "@types/react": ">=18.0.0",
+      "use-sync-external-store": ">=1.2.0"
+    },
+    "peerDependenciesMeta": {
+      "immer": {
+        "optional": true
+      },
+      "react": {
+        "optional": true
+      },
+      "@types/react": {
+        "optional": true
+      },
+      "use-sync-external-store": {
+        "optional": true
+      }
+    },
+    "finalRange": "^5.0.16",
+    "finalGroup": "dependencies",
+    "finalVersion": "5.0.16"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "devDependencies",
+    "package": "@types/react",
+    "previousRange": "^18.2.66",
+    "previousInstalled": "18.2.74",
+    "latest": "19.3.0",
+    "action": "update",
+    "peerDependencies": {},
+    "peerDependenciesMeta": null,
+    "finalRange": "^19.3.0",
+    "finalGroup": "devDependencies",
+    "finalVersion": "19.3.0"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "devDependencies",
+    "package": "@types/react-dom",
+    "previousRange": "^18.2.22",
+    "previousInstalled": "18.2.24",
+    "latest": "19.3.0",
+    "action": "update",
+    "peerDependencies": {
+      "@types/react": "^19.3.0"
+    },
+    "peerDependenciesMeta": null,
+    "finalRange": "^19.3.0",
+    "finalGroup": "devDependencies",
+    "finalVersion": "19.3.0"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "devDependencies",
+    "package": "@vitejs/plugin-react-swc",
+    "previousRange": "^3.5.0",
+    "previousInstalled": "3.11.0",
+    "latest": "4.3.3",
+    "action": "update",
+    "peerDependencies": {
+      "vite": "^4 || ^5 || ^6 || ^7 || ^8"
+    },
+    "peerDependenciesMeta": null,
+    "finalRange": "^4.3.3",
+    "finalGroup": "devDependencies",
+    "finalVersion": "4.3.3"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "devDependencies",
+    "package": "cypress",
+    "previousRange": "^13.15.2",
+    "previousInstalled": "13.17.0",
+    "latest": "16.2.1",
+    "action": "update",
+    "peerDependencies": null,
+    "peerDependenciesMeta": null,
+    "finalRange": "^16.2.1",
+    "finalGroup": "devDependencies",
+    "finalVersion": "16.2.1"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "devDependencies",
+    "package": "eslint",
+    "previousRange": "^8.57.0",
+    "previousInstalled": "8.57.0",
+    "latest": "10.14.0",
+    "action": "update",
+    "peerDependencies": {
+      "jiti": "*"
+    },
+    "peerDependenciesMeta": {
+      "jiti": {
+        "optional": true
+      }
+    },
+    "finalRange": "^10.14.0",
+    "finalGroup": "devDependencies",
+    "finalVersion": "10.14.0"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "devDependencies",
+    "package": "eslint-plugin-react",
+    "previousRange": "^7.34.1",
+    "previousInstalled": "7.34.1",
+    "latest": "7.37.5",
+    "action": "remove",
+    "peerDependencies": {
+      "eslint": "^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9.7"
+    },
+    "peerDependenciesMeta": null,
+    "finalRange": null,
+    "finalGroup": null,
+    "finalVersion": null
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "devDependencies",
+    "package": "eslint-plugin-react-hooks",
+    "previousRange": "^4.6.0",
+    "previousInstalled": "4.6.0",
+    "latest": "7.1.1",
+    "action": "update",
+    "peerDependencies": {
+      "eslint": "^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0 || ^10.0.0"
+    },
+    "peerDependenciesMeta": null,
+    "finalRange": "^7.1.1",
+    "finalGroup": "devDependencies",
+    "finalVersion": "7.1.1"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "devDependencies",
+    "package": "eslint-plugin-react-refresh",
+    "previousRange": "^0.4.6",
+    "previousInstalled": "0.4.6",
+    "latest": "0.5.7",
+    "action": "update",
+    "peerDependencies": {
+      "eslint": "^9 || ^10"
+    },
+    "peerDependenciesMeta": null,
+    "finalRange": "^0.5.7",
+    "finalGroup": "devDependencies",
+    "finalVersion": "0.5.7"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "devDependencies",
+    "package": "vite",
+    "previousRange": "^5.2.0",
+    "previousInstalled": "5.4.21",
+    "latest": "8.3.6",
+    "action": "update",
+    "peerDependencies": {
+      "tsx": "^4.8.1",
+      "jiti": ">=1.21.0",
+      "less": "^4.0.0",
+      "sass": "^1.70.0",
+      "yaml": "^2.4.2",
+      "stylus": ">=0.54.8",
+      "terser": "^5.16.0",
+      "esbuild": "^0.27.0 || ^0.28.0",
+      "sugarss": "^5.0.0",
+      "@types/node": "^20.19.0 || >=22.12.0",
+      "sass-embedded": "^1.70.0",
+      "@vitejs/devtools": "^0.7.1 || ^0.8.0"
+    },
+    "peerDependenciesMeta": {
+      "tsx": {
+        "optional": true
+      },
+      "jiti": {
+        "optional": true
+      },
+      "less": {
+        "optional": true
+      },
+      "sass": {
+        "optional": true
+      },
+      "yaml": {
+        "optional": true
+      },
+      "stylus": {
+        "optional": true
+      },
+      "terser": {
+        "optional": true
+      },
+      "esbuild": {
+        "optional": true
+      },
+      "sugarss": {
+        "optional": true
+      },
+      "@types/node": {
+        "optional": true
+      },
+      "sass-embedded": {
+        "optional": true
+      },
+      "@vitejs/devtools": {
+        "optional": true
+      }
+    },
+    "finalRange": "^8.3.6",
+    "finalGroup": "devDependencies",
+    "finalVersion": "8.3.6"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "dependencies",
+    "package": "rxjs",
+    "previousRange": null,
+    "previousInstalled": null,
+    "latest": "7.8.2",
+    "action": "add",
+    "peerDependencies": null,
+    "peerDependenciesMeta": null,
+    "finalRange": "^7.8.2",
+    "finalGroup": "dependencies",
+    "finalVersion": "7.8.2"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "devDependencies",
+    "package": "@eslint-react/eslint-plugin",
+    "previousRange": null,
+    "previousInstalled": null,
+    "latest": "5.28.8",
+    "action": "add",
+    "peerDependencies": {
+      "eslint": "*",
+      "typescript": "*"
+    },
+    "peerDependenciesMeta": {
+      "eslint": {
+        "optional": true
+      }
+    },
+    "finalRange": "^5.28.8",
+    "finalGroup": "devDependencies",
+    "finalVersion": "5.28.8"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "devDependencies",
+    "package": "@eslint/js",
+    "previousRange": null,
+    "previousInstalled": null,
+    "latest": "10.0.1",
+    "action": "add",
+    "peerDependencies": {
+      "eslint": "^10.0.0"
+    },
+    "peerDependenciesMeta": {
+      "eslint": {
+        "optional": true
+      }
+    },
+    "finalRange": "^10.0.1",
+    "finalGroup": "devDependencies",
+    "finalVersion": "10.0.1"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "devDependencies",
+    "package": "globals",
+    "previousRange": null,
+    "previousInstalled": null,
+    "latest": "17.14.0",
+    "action": "add",
+    "peerDependencies": null,
+    "peerDependenciesMeta": null,
+    "finalRange": "^17.14.0",
+    "finalGroup": "devDependencies",
+    "finalVersion": "17.14.0"
+  },
+  {
+    "project": "rippio-frontend",
+    "group": "devDependencies",
+    "package": "typescript",
+    "previousRange": null,
+    "previousInstalled": null,
+    "latest": "7.0.2",
+    "action": "automatic-peer",
+    "peerDependencies": null,
+    "peerDependenciesMeta": null,
+    "finalRange": null,
+    "finalGroup": null,
+    "finalVersion": "6.0.3",
+    "note": "TypeScript is an automatic tooling peer; typescript-eslint requires <6.1.0. The application remains JavaScript."
+  }
+]

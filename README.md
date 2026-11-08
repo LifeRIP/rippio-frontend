@@ -1,4 +1,26 @@
 # Rippio
+
+Informe de la migracion e inventario: [docs/DEPENDENCY-UPGRADE.md](docs/DEPENDENCY-UPGRADE.md).
+
+## Desarrollo local (Node 26)
+
+Versiones fijadas: Node **26.13.0**, npm **12.2.2**. El backend usa pnpm **12.16.1**.
+
+```powershell
+& "$env:NVM_HOME\nvm.exe" install 26.13.0
+& "$env:NVM_HOME\nvm.exe" use 26.13.0
+npm.cmd install --global npm@12.2.2
+npm.cmd install --global pnpm@12.16.1 --allow-scripts=pnpm
+npm.cmd ci
+# Configurar .env.local siguiendo .env.example
+npm.cmd run dev
+```
+
+## Pruebas
+
+Las instrucciones para ejecutar las pruebas unitarias y E2E estan en
+[tests/README.md](tests/README.md).
+
 Rippio is being developed to be a web application that connects people with restaurants. Your favorite foods in one place.
 
 # Website

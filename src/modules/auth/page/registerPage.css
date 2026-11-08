@@ -57,9 +57,9 @@
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    background-image: url("https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/LoginPage%2Floginbackground.png?alt=media&token=0b0acb9f-2bd0-4f79-a7e4-f2d26842309d");
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-image: url("/media/illustrations/login-background.svg");
+    background-size: 240px;
+    background-repeat: repeat;
     padding-top: 2em;
     height: 100%;
     min-height: 95vh;
@@ -132,7 +132,7 @@
     color: #7de5e9;
  }
 
- .loginPage-form.non-user-mode i, .registerPage-form.non-user-mode i{
+ .loginPage-form.non-user-mode :is(i, svg), .registerPage-form.non-user-mode :is(i, svg){
     color: #7de5e9;
  }
 
@@ -196,7 +196,7 @@
 }
 
 /* íconos en el login */
-.loginPage-form-input i{
+.loginPage-form-input :is(i, svg){
     text-align: center;
     color: #01CBC3;
     font-size: 1em;
@@ -307,6 +307,12 @@ a {
     filter:drop-shadow(0 0 5px #000000bd);
 }
 
+.right-panel-image[src$=".webp"] {
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 .right-panel-image:hover, .left-panel-image:hover{
     -webkit-transform: rotate(360deg) translate(0); 
 }
@@ -326,7 +332,7 @@ a {
 
 /* Cambios en el modo de restaurante */
 
-.panels-content.non-user-mode img{
+.panels-content.non-user-mode :is(img, svg){
     display: none;
 }
 

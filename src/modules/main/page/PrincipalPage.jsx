@@ -34,10 +34,11 @@ import { getLocation } from '../../core/utils/location'
 export function PrincipalPage() {
 
     const [topRestaurants, setTopRestaurants] = useState([{}]) //Array de restaurantes
-    const [pay_method, setPay_method] = useState(null) //Método de pago del usuario
+    const [paymentData, setPaymentData] = useState(null) //Método de pago del usuario
     const [plan, setPlan] = useState(null) //Plan del usuario
     //Traer token de zustand
     const token = useAuth(state => state.token)
+    const pay_method = token ? paymentData : [];
     //Estado para guardar las ordenes del usuario que estén en un estado diferente a entregado
     const [orders, setOrders] = useState([])
 
@@ -117,7 +118,7 @@ export function PrincipalPage() {
                     console.log(err);
                 })
         }
-    }, [])
+    }, [token])
 
     //UseEffect para traer los métodos de pago del usuario
     useEffect(() => {
@@ -125,7 +126,7 @@ export function PrincipalPage() {
             getPayments(token)
                 .then(res => {
                     if (res.data.length === 0) {
-                        setPay_method([])
+                        setPaymentData([])
                         return
                     }
                     const newPayMethod = res.data.map(method => {
@@ -135,12 +136,10 @@ export function PrincipalPage() {
                             label: firstFourthAndTwoLast
                         }
                     })
-                    setPay_method(newPayMethod)
+                    setPaymentData(newPayMethod)
                 }).catch(err => {
                     console.log(err);
                 })
-        } else {
-            setPay_method([])
         }
     }, [token])
 

@@ -65,7 +65,7 @@
     align-items: end;
 }
 
-.OrderManage-content-items-item img{
+.OrderManage-content-items-item :is(img, svg){
     width: 6.5em;
     height: 6.5em;
     border-radius: 50%;
@@ -148,7 +148,7 @@
     .OrderManage-content-items-item {
         font-size: 0.9em;
     }
-    .OrderManage-content-items-item img {
+    .OrderManage-content-items-item :is(img, svg) {
         width: 4em;
         height: 4em;
     }

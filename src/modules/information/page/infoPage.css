@@ -7,7 +7,7 @@
     background-color: white;
 }
 
-.info-container-video{
+.info-container-visual{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,9 +20,7 @@
     z-index: 1;
 }
 
-.info-container-video > video{
-    width: 100%;
-}
+
 
 .info-container-title{
     display: flex;
@@ -60,7 +58,7 @@
 }
 
 .info-container-mision{
-    background-image: url(https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/InfoPage%2FCurveDecoration.png?alt=media&token=a5eb0fd1-8acf-437a-9117-29fdf4d907e7);
+    background-image: url(/media/illustrations/info-wave-1.svg);
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: start;
@@ -103,7 +101,7 @@
 
 
 .help-container-questions{
-    background-image: url(https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/InfoPage%2FCurveDecoration2.png?alt=media&token=656e9b15-718b-482a-a9a2-40188c0de5cc);
+    background-image: url(/media/illustrations/info-wave-2.svg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: start;
@@ -168,7 +166,7 @@
 }
 
 .help-container-contact{
-    background-image: url(https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/InfoPage%2FCurveDecoration3.png?alt=media&token=ef6f8684-ed14-45e8-ac13-86c03be31bf8);
+    background-image: url(/media/illustrations/info-wave-3.svg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: start;
@@ -200,10 +198,7 @@
 
 @media (max-width: 1110px ){
 
-    .info-container-video > video{
-        width: 200%;
-        
-    }
+
 
     .info-container-title > h1{
         font-size: 3.5em;
@@ -217,10 +212,7 @@
 
 @media (max-width: 714px ){
 
-    .info-container-video > video{
-        width: 300%;
-        
-    }
+
 
     .info-container-title > h1{
         font-size: 3.5em;
@@ -234,10 +226,7 @@
 
 @media (max-width: 440px ){
 
-    .info-container-video > video{
-        width: 500%;
-        
-    }
+
 
     .info-container-title > h1{
         font-size: 3em;
@@ -262,3 +251,5 @@
         padding: 0 2em;
     }
 }
+
+.info-container-visual > img { width: 100%; height: 100%; object-fit: cover; }

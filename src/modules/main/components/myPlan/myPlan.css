@@ -1,6 +1,6 @@
 .myPlan{
     min-height: 65vh;
-    background: url('https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/HomePage%2FPlanSection%2FPlanBackground.png?alt=media&token=801bb8e3-2bb0-463f-84a0-40473aeb4c52');
+    background: url('/principalPage/planSection/background.png');
     background-size: cover;
     width: 100%;
     color: #fff;

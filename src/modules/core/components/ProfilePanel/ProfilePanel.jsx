@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import './profilePanel.css'
 import { NavLink } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ export function ProfilePanel({ links }) {
                         links.map((link) => (
                             <li key={link.to}>
                                 <NavLink className={getLinkClass} to={link.to}>
-                                    <img src={link.icon} alt={link.to} />
+                                    <AppImage src={link.icon} alt={link.to} />
                                     {link.text}
                                 </NavLink>
                             </li>

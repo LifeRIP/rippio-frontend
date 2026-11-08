@@ -1,17 +1,16 @@
-/* eslint-disable react/prop-types */
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import Modal from 'react-modal';
 import './productModal.css';
 import { useState } from 'react';
-import { useEffect } from 'react';
 
-export const ProductModal = ({ productInModal, restaurant, isOpen, handleAddBtn, handleCancelBtn }) => {
+
+export const ProductModal = (props) => <ProductModalForm key={(props.productInModal?.id || 'empty') + ':' + props.isOpen} {...props} />;
+
+const ProductModalForm = ({ productInModal, restaurant, isOpen, handleAddBtn, handleCancelBtn }) => {
 
     const [quantity, setQuantity] = useState(1)
     const [product, setProduct] = useState(productInModal)
 
-    useEffect(() => {
-        setProduct(productInModal)
-    }, [productInModal])
 
     const increaseQuantity = () => {
         setQuantity(quantity + 1)
@@ -36,7 +35,7 @@ export const ProductModal = ({ productInModal, restaurant, isOpen, handleAddBtn,
                     <section className='ProductModal-section-container'>
                         <section className='ProductModal-sectionImg'>
                             <div className='ProductModal-sectionImg-imgContainer'>
-                                <img draggable='false' src={product.img_product} alt={product.nombre} />
+                                <AppImage kind="product" name={product.nombre} draggable='false' src={product.img_product} alt={product.nombre} />
                             </div>
                             <div className='ProductModal-sectionImg-quantityContainer'>
                                 <button className='ProductModal-sectionImg-quantityContainer-btn' onClick={decreaseQuantity}>-</button>

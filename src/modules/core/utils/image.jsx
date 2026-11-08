@@ -1,3 +1,4 @@
+import { createImageStorage } from './image-storage';
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL, uploadBytes, deleteObject } from "firebase/storage";
 
@@ -12,34 +13,7 @@ const firebaseConfig = {
     measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
-const app = initializeApp(firebaseConfig);
-const storage = getStorage(app);
+const app = firebaseConfig.apiKey && firebaseConfig.projectId && firebaseConfig.storageBucket ? initializeApp(firebaseConfig) : null;
+const storage = app ? getStorage(app) : null;
 
-export async function uploadFile(file, to, name){
-    const storageRef = ref(storage, `${to}/${name}`);
-    await uploadBytes(storageRef, file);
-    const url = await getDownloadURL(storageRef);
-    return url;
-}
-
-export async function renameFile(oldPath, newPath) {
-    const storage = getStorage();
-    const oldRef = ref(storage, oldPath);
-    const newRef = ref(storage, newPath);
-
-    // Descargar el archivo existente
-    const url = await getDownloadURL(oldRef);
-    const response = await fetch(url);
-    const blob = await response.blob();
-
-    // Subir el archivo con el nuevo nombre
-    await uploadBytes(newRef, blob);
-
-    // Eliminar el archivo antiguo
-    await deleteObject(oldRef);
-
-    // Obtener la nueva URL de descarga
-    const newUrl = await getDownloadURL(newRef);
-
-    return newUrl;
-}
+export const { uploadFile, renameFile } = createImageStorage(storage, { ref, uploadBytes, getDownloadURL, deleteObject });

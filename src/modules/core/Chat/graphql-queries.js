@@ -6,7 +6,6 @@ export const GET_MESSAGES_BY_ORDER_ID = gql`
       id
       mensaje
       img_icon
-      mensaje
       tipo_usuario
       fecha
     }

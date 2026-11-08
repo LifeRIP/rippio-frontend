@@ -1,13 +1,21 @@
-/* eslint-disable react/prop-types */
+import { useRef } from 'react';
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import Modal from 'react-modal'
 import './restaurantProductMenuModal.css'
 import Select from 'react-select';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Tippy from '@tippyjs/react';
 
 
 
-export default function RestaurantProductMenuModal({ loading, setFile, isModalOpen, handleCancel, handleConfirm, setProduct, categories, newProduct, productSelectedToEdit, loadingProduct }) {
+export default function RestaurantProductMenuModal(props) {
+    return <ProductMenuForm key={(props.productSelectedToEdit?.id || 'new') + ':' + props.isModalOpen} {...props} />;
+}
+
+function ProductMenuForm({ loading, setFile, isModalOpen, handleCancel, handleConfirm, setProduct, categories, newProduct, productSelectedToEdit, loadingProduct }) {
+    const primaryTooltipRef = useRef(null);
+
 
 
     const categoryOptions = categories.map(category => {
@@ -27,14 +35,9 @@ export default function RestaurantProductMenuModal({ loading, setFile, isModalOp
         uploadProductImage.click();
     }
 
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState(productSelectedToEdit?.img_product || '')
 
 
-    useEffect(() => {
-        if (productSelectedToEdit && image !== productSelectedToEdit.img_product) {
-            setImage(productSelectedToEdit.img_product);
-        }
-    }, [productSelectedToEdit]);
 
     const uploadImage = async (file) => {
         if (!file) return;
@@ -193,27 +196,26 @@ export default function RestaurantProductMenuModal({ loading, setFile, isModalOp
                             className='AddProductMenuModal-form-input AddProductMenuModal-form-inputImage'
                         >
                             <label className="hidden-label">Subir imagen</label>
-                            <img
+                            <AppImage kind="product" name={newProduct?.nombre || productSelectedToEdit?.nombre}
                                 className={'AddProductMenuModal-form-inputImage-img' + ' ' +
                                     (loading ? 'AddProductMenuModal-form-inputImage-imgLoading' :
                                         image.length > 0 ? '' : 'AddProductMenuModal-form-inputImage-imgDefault')}
                                 src={
-                                    loading ? 'https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2Floading.png?alt=media&token=b1a554d7-4784-4f3c-892b-662ff72a3804'
+                                    loading ? media.icons["loader"]
                                         : image.length > 0 ? image
-                                            : 'https://cdn-icons-png.flaticon.com/512/32/32339.png'
+                                            : media.icons.image
                                 }
                             />
                             <input
                                 required={productSelectedToEdit ? false : true}
                                 type="file" id="uploadProductImage" name="uploadImage" accept=".png, .jpg, .jpeg"
                                 onChange={handleInputProfileChange} />
-                            <Tippy content='Intentaremos dar la mejor presentación al público'>
-                                <button type='button' className="AddProductMenuModal-form-inputImage-Btn" onClick={handleButtonClick}>
-                                    <img draggable='false' className="AddProductMenuModal-form-inputImage-imgBtn"
-                                        src="https://icons.veryicon.com/png/o/miscellaneous/linear-small-icon/edit-246.png"
+                            <button ref={primaryTooltipRef} type='button' className="AddProductMenuModal-form-inputImage-Btn" onClick={handleButtonClick}>
+                                    <AppImage draggable='false' className="AddProductMenuModal-form-inputImage-imgBtn"
+                                        src={media.icons.edit}
                                         alt="Upload Icon" />
                                 </button>
-                            </Tippy>
+                        <Tippy content='Intentaremos dar la mejor presentación al público' reference={primaryTooltipRef} />
                         </div>
                         <div
                             className='AddProductMenuModal-form-input AddProductMenuModal-form-inputPrice'

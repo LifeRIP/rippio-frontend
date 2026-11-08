@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import './orderSliderPrincipalPage.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -76,9 +75,9 @@ export function OrderSliderPrincipalPage({ orders }) {
                             <p>{order.fechayhora}</p>
                             {order.creditos_usados > 0 ?
 
-                                <p>Total: $<del>{order.costo_total + order.creditos_usados}</del> ${order.costo_total}</p>
+                                <p>Total: $<del>{order.costo_total + order.creditos_usados}</del> {'$'}{order.costo_total}</p>
                                 :
-                                <p>Total: ${order.costo_total}</p>
+                                <p>Total: {'$'}{order.costo_total}</p>
                             }
                             <button
                                 onClick={

@@ -33,7 +33,7 @@
 .plan-background-img{
     width: 100%;
     height: 100%;
-    object-fit: 100%;
+    object-fit: cover;
     overflow: hidden;
     
 }
@@ -135,7 +135,7 @@
 
 @media screen and (max-width: 685px){
     .plan-background-img{
-        background-image: src('https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/HomePage%2FPlanSection%2FPlanBackground.png?alt=media&token=801bb8e3-2bb0-463f-84a0-40473aeb4c52');
+        background-image: src('/principalPage/planSection/background.png');
         object-fit: cover;
         
     }

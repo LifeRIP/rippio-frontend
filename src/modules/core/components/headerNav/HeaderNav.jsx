@@ -1,3 +1,5 @@
+import { media } from '@m/core/utils/media';
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import './headerNav.css'
 import HeaderDrawer from '@m/core/components/headerDrawer/HeaderDrawer'
 import { useCart } from '@m/core/hooks/useCart'
@@ -14,7 +16,7 @@ export default function HeaderNav() {
     return (
         <header className='mainContent-headerPrincipalPage'>
             <div className='mainContent-headerPrincipalPage-logo'>
-                <Link to='/'><img className='logoIcon' draggable='false' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FrippioHeader.png?alt=media&token=f16a9034-cf38-4a78-b93b-a2cedaa10aab' /></Link>
+                <Link to='/'><AppImage kind="logo" alt="Rippio Food" className='logoIcon' draggable='false' src={media.logo} /></Link>
             </div>
             <nav className='headerPrincipalPage-nav'>
                 <ul className='headerPrincipalPage-ul'>
@@ -34,12 +36,12 @@ export default function HeaderNav() {
                     !isAuthenticated || user?.tipo_usuario === 1
                         ?
                         <div>
-                            <button onClick={() => handleClickCartModal(toggleCartModal)} className='cartLink'>
+                            <button aria-label="Abrir carrito" onClick={() => handleClickCartModal(toggleCartModal)} className='cartLink'>
                                 {
                                     cart.items.length > 0 ?
-                                        <img className='cartIcon' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FcartContainIcon.png?alt=media&token=c2351f31-8fc7-4c0d-bf40-2b92324f2591' />
+                                        <AppImage className='cartIcon' src={media.icons["cart-full"]} />
                                         :
-                                        <img className='cartIcon' src='https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FcartIcon.png?alt=media&token=f05761a9-9b6e-4be8-a240-53a483a3461d' />
+                                        <AppImage className='cartIcon' src={media.icons["cart"]} />
                                 }
                             </button>
                         </div>
@@ -47,11 +49,11 @@ export default function HeaderNav() {
                 }
                 <div>
                     {
-                        <Link to={isAuthenticated ? '/profile' : '/login'}
+                        <Link aria-label={isAuthenticated ? 'Mi perfil' : 'Ingresar'} to={isAuthenticated ? '/profile' : '/login'}
                             className='headerPrincipalPage-a'>
                             <div className='userlink'>
-                                <img className='userIcon'
-                                    src={isAuthenticated ? user?.img_icon : 'https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/icons%2FdefaultUserIcon.png?alt=media&token=4cf7ae75-e6ac-4fc4-b33f-e3d869739818'}
+                                <AppImage kind={user?.tipo_usuario === 3 ? "restaurant" : "avatar"} name={user?.nombre} className='userIcon'
+                                    src={isAuthenticated ? user?.img_icon : media.icons["user"]}
                                 />
                                 <span className='userText'>{isAuthenticated ? user.tipo_usuario !== 3 ? user.nombre.split(' ')[0] : user.nombre : 'Ingresa'}
                                 </span></div></Link>

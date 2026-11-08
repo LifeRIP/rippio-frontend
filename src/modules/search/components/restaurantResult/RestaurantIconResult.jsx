@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import { AppImage } from '@m/core/components/appImage/AppImage';
 import { Link } from 'react-router-dom'
 import './restaurantIconResult.css'
 
@@ -51,7 +51,7 @@ export function RestaurantIconResult({ results }) {
                 {results.map((restaurant) => (
                     <SwiperSlide key={restaurant.id}>
                         <Link to={`/restaurant/${restaurant.id}`} key={restaurant.id} className='searchPage-iconsContainer-link'>
-                            <img key={restaurant.id} className='searchPage-iconsContainer-img' src={restaurant.img_icon} alt={restaurant.nombre} />
+                            <AppImage kind="restaurant" name={restaurant.nombre || restaurant.name} key={restaurant.id} className='searchPage-iconsContainer-img' src={restaurant.img_icon} alt={restaurant.nombre} />
                         </Link>
                     </SwiperSlide>
                 ))}
