@@ -1,35 +1,17 @@
 # Rippio
 
-Informe de la migracion e inventario: [docs/DEPENDENCY-UPGRADE.md](docs/DEPENDENCY-UPGRADE.md).
-
-## Desarrollo local (Node 26)
-
-Versiones fijadas: Node **26.13.0**, npm **12.2.2**. El backend usa pnpm **12.16.1**.
-
-```powershell
-& "$env:NVM_HOME\nvm.exe" install 26.13.0
-& "$env:NVM_HOME\nvm.exe" use 26.13.0
-npm.cmd install --global npm@12.2.2
-npm.cmd install --global pnpm@12.16.1 --allow-scripts=pnpm
-npm.cmd ci
-# Configurar .env.local siguiendo .env.example
-npm.cmd run dev
-```
-
-## Pruebas
-
-Las instrucciones para ejecutar las pruebas unitarias y E2E estan en
-[tests/README.md](tests/README.md).
-
 Rippio is being developed to be a web application that connects people with restaurants. Your favorite foods in one place.
 
 # Website
+
 [Visit Rippio](https://rippio.netlify.app/)
 
 # How it Works
+
 Rippio includes two methods of use: as a client or as a restaurant. Both can create an account, sign in, and change their password if forgotten.
 
 ## As a Client
+
 - **Manage Profile:** Upload a profile photo, update your information, payment methods, and address.
 - **View Orders and Credits:** Keep track of your orders and credits.
 - **Use the Cart:** Add products to the cart, which can be used without an account and will be saved for your next session. Proceed to pay when ready.
@@ -41,6 +23,7 @@ Rippio includes two methods of use: as a client or as a restaurant. Both can cre
 ![Cart and Payment](public/readme/c1.png)
 
 ## As a Restaurant
+
 - **Select Categories:** Manage your restaurant's categories, number, address, and schedule.
 - **Create a Menu:** Set up sections and products for your menu.
 - **Manage Orders:** Easily manage orders by selecting a status (e.g., pending, in progress, canceled). View user details and order specifics.
@@ -53,16 +36,19 @@ Rippio includes two methods of use: as a client or as a restaurant. Both can cre
 # Parts of the Application
 
 ## Search Section
+
 Search for restaurants or specific dishes easily using the search feature.
 
 ![Search Section](public/readme/a1.png)
 
 ## All Restaurants Section
+
 Browse through a comprehensive list of all available restaurants. View restaurant details, ratings, and available dishes before making your choice.
 
 ![All Restaurants Section](public/readme/a2.png)
 
 ## Checkout Section
+
 Complete your purchase.
 
 ![Checkout Section](public/readme/a3.png)

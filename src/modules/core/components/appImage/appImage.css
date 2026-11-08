@@ -7,7 +7,9 @@
 }
 .app-icon[data-icon="star"] { color: #ffb600; fill: #ffb600; }
 .app-icon[data-icon="cart"], .app-icon[data-icon="cart-full"], .app-icon[data-icon="user"] { color: var(--darkblue); }
-.app-icon[data-icon="cart-full"] { fill: #bcece4; }
+.app-icon[data-icon="cart-full"] { fill: none; }
+.app-icon[data-icon="cart-full"] path:nth-of-type(2),
+.app-icon[data-icon="cart-full"] circle { fill: #bcece4; }
 .app-icon[data-icon="crown"] { color: #e6a400; fill: #ffdc72; }
 .app-icon[data-icon="loader"] { animation: media-spin 1s linear infinite; }
 @keyframes media-spin { to { transform: rotate(360deg); } }

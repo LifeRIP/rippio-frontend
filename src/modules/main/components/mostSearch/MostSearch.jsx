@@ -9,12 +9,18 @@ import { mostOrdered } from '@/api/order'
         date.setDate(date.getDate() + 1)
         const fecha = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
         const response = await mostOrdered(fecha)
+        if (!Array.isArray(response.data)) {
+            throw new Error('La API de productos más pedidos no devolvió una lista. Revisa VITE_API_URL.');
+        }
         // Ir retrocediendo la fecha hasta que se encuentre un día con pedidos
         let ordered = response.data;
         while (ordered.length === 0) {
             date.setDate(date.getDate() - 1)
             const fecha = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
             const response = await mostOrdered(fecha)
+            if (!Array.isArray(response.data)) {
+                throw new Error('La API de productos más pedidos no devolvió una lista. Revisa VITE_API_URL.');
+            }
             ordered = response.data
         }
         return ordered

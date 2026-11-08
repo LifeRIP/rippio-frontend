@@ -4,6 +4,7 @@ import RegisterPage from '@m/auth/page/RegisterPage.jsx'
 
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { Page404 } from '@m/404/page/Page404.jsx'
+import { RouteError } from '@m/404/page/RouteError.jsx'
 import { ChangePassword } from '@m/forgetPassword/page/ChangePassword.jsx'
 import { ResetPassword } from '@m/forgetPassword/page/ResetPassword.jsx'
 import { SearchPage } from '@m/search/page/SearchPage.jsx'
@@ -50,12 +51,12 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
-    errorElement: <Page404 />,
+    errorElement: <RouteError />,
     children: [
       {
         path: '/',
         element: <OnlyClientNoLoginRoute element={<App />} />,
-        errorElement: <Page404 />
+        errorElement: <RouteError />
       },
       {
         path: '/login',

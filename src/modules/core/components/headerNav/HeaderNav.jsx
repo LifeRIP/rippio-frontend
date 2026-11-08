@@ -12,6 +12,10 @@ export default function HeaderNav() {
     const { toggleCartModal } = useCart()
     const isAuthenticated = useAuth((state) => state.isAuthenticated)
     const user = useAuth((state) => state.user)
+    const userName = typeof user?.nombre === 'string' ? user.nombre.trim() : '';
+    const displayName = userName
+        ? user?.tipo_usuario === 3 ? userName : userName.split(/\s+/)[0]
+        : 'Mi perfil';
 
     return (
         <header className='mainContent-headerPrincipalPage'>
@@ -55,7 +59,7 @@ export default function HeaderNav() {
                                 <AppImage kind={user?.tipo_usuario === 3 ? "restaurant" : "avatar"} name={user?.nombre} className='userIcon'
                                     src={isAuthenticated ? user?.img_icon : media.icons["user"]}
                                 />
-                                <span className='userText'>{isAuthenticated ? user.tipo_usuario !== 3 ? user.nombre.split(' ')[0] : user.nombre : 'Ingresa'}
+                                <span className='userText'>{isAuthenticated ? displayName : 'Ingresa'}
                                 </span></div></Link>
 
                     }

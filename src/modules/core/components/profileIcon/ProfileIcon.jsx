@@ -52,8 +52,8 @@ export function ProfileIcon() {
             <label className="hidden-label" htmlFor="upload">Subir imagen:</label>
             <input type="file" id="upload" name="upload" accept=".png, .jpg, .jpeg"
                 onChange={handleInputProfileChange} />
-            <button className="ProfileIconOptions-header-button" onClick={handleButtonClick}>
-                <AppImage draggable='false' className="ProfileIconOptions-header-imgEdit" src={media.icons.edit} alt="Upload Icon" />
+            <button type="button" aria-label="Editar foto de perfil" className="ProfileIconOptions-header-button" onClick={handleButtonClick}>
+                <AppImage draggable='false' className="ProfileIconOptions-header-imgEdit" src={media.icons.edit} />
             </button>
         </div>
     )

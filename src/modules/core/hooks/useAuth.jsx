@@ -1,11 +1,23 @@
 import { create } from 'zustand'
 import { getUserData, loginRequest, registerRequest } from '@/api/auth'
 
+function readStoredUser() {
+    try {
+        const user = JSON.parse(window.localStorage.getItem('user'));
+        return user && typeof user === 'object' && !Array.isArray(user) && user.id != null ? user : null;
+    } catch {
+        return null;
+    }
+}
+
+const storedUser = readStoredUser();
+const storedToken = storedUser ? window.localStorage.getItem('token') : null;
+
 export const useAuth = create((set) => ({
-    user: window.localStorage.getItem('user') ? JSON.parse(window.localStorage.getItem('user')) : null,
-    token: window.localStorage.getItem('token') || null,
+    user: storedUser,
+    token: storedToken || null,
     errors: null,
-    isAuthenticated: window.localStorage.getItem('token') ? true : false,
+    isAuthenticated: Boolean(storedToken),
     setUser: (user) => {
         set({ user });
         window.localStorage.setItem('user', JSON.stringify(user));

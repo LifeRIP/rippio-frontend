@@ -166,6 +166,9 @@ export const useStart = () => {
     if (!isAuthenticated || !userId) return;
     let active = true;
     getUserData(userId).then(({ data }) => {
+      if (!Array.isArray(data) || !data[0] || typeof data[0].nombre !== 'string') {
+        throw new Error('La API no devolvió un perfil de usuario válido. Revisa VITE_API_URL.');
+      }
       if (active) setUser(data[0]);
     }).catch(console.error);
     return () => { active = false; };

@@ -23,11 +23,13 @@
     display: flex;
     justify-content:space-between;
     align-items: center;
+    gap: 1em;
 }
 
 .ModalCart-content-item-actions{
     display: flex;
     gap: .7em;
+    flex-shrink: 0;
 }
 
 .ModalCart-content-item-btn{
@@ -48,23 +50,25 @@
     transition: .6s;
 }
 
-.ModalCart-content-item :is(img, svg){
+.ModalCart-content-item-product > img{
+    display: block;
     width: 5em;
     height: 5em;
+    flex: 0 0 5em;
     object-fit: cover;
-    border-radius: 50%;
-    margin-right: 1em;
-    box-shadow: -3px 3px 0px 1px rgba(57, 143, 146, 0.644);
+    border-radius: .75em;
 }
 
 .ModalCart-content-item-product{
     display: flex;
     align-items: center;
-
+    gap: 1em;
+    min-width: 0;
 }
 
 .ModalCart-content-item-info{
-    margin-right: 3em;
+    min-width: 0;
+    overflow-wrap: anywhere;
     text-align: start;
     line-height: 1.2em;
 }
@@ -142,4 +146,20 @@
     color: #627072;
     margin: 1em;
 } 
+
+@media screen and (max-width: 480px){
+    .ModalCart-content-item{
+        flex-wrap: wrap;
+        padding: 1em .5em;
+    }
+
+    .ModalCart-content-item-actions{
+        margin-left: auto;
+    }
+
+    .ModalCart-content-total{
+        flex-wrap: wrap;
+        gap: 1em;
+    }
+}
 
