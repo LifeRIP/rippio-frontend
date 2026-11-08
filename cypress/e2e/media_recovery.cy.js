@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-/* global cy, expect */
 const legacy = 'https://firebasestorage.googleapis.com/v0/b/rippio.appspot.com/o/missing.png?alt=media';
 const broken = '/__missing_media__/photo.webp';
 const restaurant = { id: 10, nombre: 'Pizza de la casa', img_icon: legacy, img_banner: legacy, calificacion: 4.7 };

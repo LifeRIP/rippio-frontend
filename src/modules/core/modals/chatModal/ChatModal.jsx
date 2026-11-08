@@ -1,7 +1,6 @@
 import { media } from '@m/core/utils/media';
 import { AppImage } from '@m/core/components/appImage/AppImage';
 import { isChatConfigured } from '@m/core/apollo-client';
-/* eslint-disable react/prop-types */
 import LeftMessage from '@m/core/components/leftMessage/LeftMessage';
 import RightMessage from '@m/core/components/rightMessage/RightMessage';
 import './chatModal.css';
@@ -55,15 +54,15 @@ function ConfiguredChatModal({ isOpen, closeModal, order }) {
                         <p role='alert'>{sendError || queryError?.message || subscriptionError?.message}</p>
                     )}
 
-                    {user.tipo_usuario == 3 && data && data.getchat_order.map((data, index) =>
+                    {user.tipo_usuario == 3 && data && data.getchat_order.map((data) =>
                     (data.tipo_usuario == 3 ?
-                        <RightMessage key={index} message={data.mensaje} date={data.fecha} image={data.img_icon} /> :
-                        <LeftMessage key={index} message={data.mensaje} date={data.fecha} image={data.img_icon} />))}
+                        <RightMessage key={data.id} message={data.mensaje} date={data.fecha} image={data.img_icon} /> :
+                        <LeftMessage key={data.id} message={data.mensaje} date={data.fecha} image={data.img_icon} />))}
 
-                    {user.tipo_usuario == 1 && data && data.getchat_order.map((data, index) =>
+                    {user.tipo_usuario == 1 && data && data.getchat_order.map((data) =>
                     (data.tipo_usuario == 1 ?
-                        <RightMessage key={index} message={data.mensaje} date={data.fecha} image={data.img_icon} /> :
-                        <LeftMessage key={index} message={data.mensaje} date={data.fecha} image={data.img_icon} />))}
+                        <RightMessage key={data.id} message={data.mensaje} date={data.fecha} image={data.img_icon} /> :
+                        <LeftMessage key={data.id} message={data.mensaje} date={data.fecha} image={data.img_icon} />))}
 
                 </section>
                 <footer className='ChatModal-footer'>

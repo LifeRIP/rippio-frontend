@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
 // Main.jsx
-import { ApolloProvider } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react';
 import { client } from '@m/core/apollo-client';
 // Main.jsx
 import React from 'react';

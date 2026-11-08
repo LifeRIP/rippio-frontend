@@ -4,12 +4,6 @@ import './mostSearch.css'
 import { Link } from 'react-router-dom';
 import { mostOrdered } from '@/api/order'
 
-export function MostSearch() {
-
-    // Lo más pedido
-    const [mostSearched, setMostSearched] = useState(null)
-
-    // Función para traer lo más pedido, comenzando desde mañana
     const getMostSearched = async () => {
         const date = new Date()
         date.setDate(date.getDate() + 1)
@@ -23,12 +17,19 @@ export function MostSearch() {
             const response = await mostOrdered(fecha)
             ordered = response.data
         }
-        setMostSearched(ordered)
+        return ordered
     }
 
+
+export function MostSearch() {
+
+    // Lo más pedido
+    const [mostSearched, setMostSearched] = useState(null)
+
+    // Función para traer lo más pedido, comenzando desde mañana
     // UseEffect para traer los productos más pedidos
     useEffect(() => {
-        getMostSearched()
+        getMostSearched().then(setMostSearched).catch(console.error)
     }, [])
 
     if (!mostSearched) return null
@@ -39,8 +40,8 @@ export function MostSearch() {
                 <h2 className="mostSearched-title">Lo más pedido hoy</h2>
                 <section className="mostSearched-content-items">
                     {
-                        mostSearched.map((item, index) => (
-                            <div key={index} className="mostSearched-item">
+                        mostSearched.map((item) => (
+                            <div key={item.category} className="mostSearched-item">
                                 <Link to={`/searchpage/${item.category}`} className='mostsearched-link'>{item.category}</Link>
                             </div>
                         ))

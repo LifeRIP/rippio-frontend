@@ -1,6 +1,5 @@
 import { media } from '@m/core/utils/media';
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
 import './change.css'
 import { useState } from 'react';

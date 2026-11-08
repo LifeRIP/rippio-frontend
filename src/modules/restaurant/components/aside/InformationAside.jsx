@@ -1,6 +1,5 @@
 import { media } from '@m/core/utils/media';
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import './informationAside.css'
 
@@ -10,8 +9,8 @@ export function InformationAside({ name, direction, schedule, rating, logo, bann
     const [showSchedule, setShowSchedule] = useState(true);
 
     const handleShowSchedule = () => {
-        schedule = document.querySelector('.RestaurantPage-content-aside-information-schedule-days');
-        schedule.classList.toggle('RestaurantPage-content-aside-information-schedule-days-active');
+        const scheduleElement = document.querySelector('.RestaurantPage-content-aside-information-schedule-days');
+        scheduleElement.classList.toggle('RestaurantPage-content-aside-information-schedule-days-active');
         setShowSchedule(!showSchedule);
     }
 
@@ -90,9 +89,9 @@ export function InformationAside({ name, direction, schedule, rating, logo, bann
                     >
                         {
                             schedule
-                                ? schedule.map((day, index) => {
+                                ? schedule.map((day) => {
                                     return (
-                                        <div className='RestaurantPage-content-aside-information-schedule-day' key={index}>
+                                        <div className='RestaurantPage-content-aside-information-schedule-day' key={day.day}>
 
                                             {
                                                 (day.open === '00:00' && day.close === '00:00')

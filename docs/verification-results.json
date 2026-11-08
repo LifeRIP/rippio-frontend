@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-05",
+  "node": "v26.13.0",
+  "results": [
+    {
+      "name": "clean-install",
+      "command": "npm ci --prefer-offline --no-audit --no-fund",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "status": "passed"
+    },
+    {
+      "name": "unit",
+      "command": "npm test",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "status": "passed"
+    },
+    {
+      "name": "tree",
+      "command": "npm ls --all --json",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "status": "passed"
+    },
+    {
+      "name": "outdated",
+      "command": "npm outdated --json",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "status": "passed"
+    },
+    {
+      "name": "audit",
+      "command": "npm audit --json",
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "status": "completed-with-documented-low-advisories"
+    },
+    {
+      "name": "lint",
+      "command": "npm run lint",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "status": "passed"
+    },
+    {
+      "name": "build",
+      "command": "npm run build",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "status": "passed"
+    },
+    {
+      "name": "e2e",
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "status": "passed"
+    }
+  ],
+  "tests": {
+    "unit": {
+      "passed": 8,
+      "failed": 0
+    },
+    "cypress": {
+      "passed": 35,
+      "failed": 0,
+      "pending": 0,
+      "skipped": 0
+    }
+  },
+  "audit": {
+    "info": 0,
+    "low": 4,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 4
+  },
+  "outdated": {},
+  "treeProblems": [],
+  "lint": {
+    "errors": 0,
+    "warnings": 0
+  }
+}

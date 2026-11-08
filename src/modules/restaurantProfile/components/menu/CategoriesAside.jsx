@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {  useEffect, useState } from 'react';
 import './categoriesAside.css'
 import axios from 'axios';
@@ -11,9 +10,8 @@ export default function CategoriesAside({ categories, setCategories, setSelected
     const [error, setError] = useState(null);
     useEffect(() => {
         if (error) {
-            setTimeout(() => {
-                setError(null)
-            }, 3000)
+            const timer = setTimeout(() => { setError(null); }, 3000);
+            return () => clearTimeout(timer);
         }
     }, [error])
     

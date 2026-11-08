@@ -38,7 +38,6 @@ export function AllRestaurants() {
 
     // Función para traer los restaurantes
     const getMyRestaurants = (city, category, rating) => {
-        setLoading(true)
         getRestaurants(city, category, rating)
             .then(res => {
                 setRestaurants(res.data)
@@ -54,8 +53,9 @@ export function AllRestaurants() {
         if (e.value === selectedCategory) {
             return
         }
+        setLoading(true)
         setSelectedCategory(e.value)
-        getMyRestaurants(location.city, e.value, ratingValue)
+
     }
 
     // Función para seleccionar el rating
@@ -63,8 +63,9 @@ export function AllRestaurants() {
         if (e === ratingValue) {
             return
         }
+        setLoading(true)
         setRatingValue(e)
-        getMyRestaurants(location.city, selectedCategory, e)
+
     }
 
     // UseEffect para llevar el scroll al inicio y limpiar el params
@@ -104,7 +105,7 @@ export function AllRestaurants() {
                 setCategory(newCategories)
                 if (searchCategory) {
                     const category = newCategories.find(c => c.value === searchCategory)
-                    setSelectedCategory(category.value)
+                    setSelectedCategory(category?.value ?? null)
                 }
             }).catch(err => {
                 console.log(err)
@@ -148,11 +149,11 @@ export function AllRestaurants() {
                         permission ?
                             loading ? <p>Cargando...</p> :
                                 restaurants.length > 0 ?
-                                    restaurants.map((restaurant, index) => {
+                                    restaurants.map((restaurant) => {
                                         return (
                                             <button
                                                 onClick={() => navigator(`/restaurant/${restaurant.id}`)}
-                                                key={index} className='all-restaurants-main-restaurant'>
+                                                key={restaurant.id} className='all-restaurants-main-restaurant'>
                                                 <AppImage kind="banner" name={restaurant.nombre} draggable='false' src={restaurant.img_banner} alt='banner' />
                                                 <div className='all-restaurants-main-restaurant-info'>
                                                     <AppImage kind="restaurant" name={restaurant.nombre || restaurant.name} draggable='false' src={restaurant.img_icon} alt='Logo' />

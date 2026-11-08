@@ -1,6 +1,5 @@
 import { AppImage } from '@m/core/components/appImage/AppImage';
 import { media } from '@m/core/utils/media';
-/* eslint-disable react/no-unescaped-entities */
 // import { Link } from 'react-router-dom';
 import HeaderNav  from '@m/core/components/headerNav/HeaderNav';
 import { Footer } from '@m/core/components/footer/Footer';

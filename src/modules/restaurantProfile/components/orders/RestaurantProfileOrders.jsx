@@ -62,9 +62,9 @@ export default function RestaurantProfileOrders() {
                                         className='restaurantProfileOrders-content-item-content-obDir'>
                                         {order.observacion_direccion}</p>
                                     <div>
-                                        <p><b>Total:</b> ${order.total}</p>
-                                        <p><b>Envío: </b>${order.costo_envio}</p>
-                                        <p><b>Subtotal:</b> ${order.subtotal}</p>
+                                        <p><b>Total:</b> {'$'}{order.total}</p>
+                                        <p><b>Envío: </b>{'$'}{order.costo_envio}</p>
+                                        <p><b>Subtotal:</b> {'$'}{order.subtotal}</p>
                                     </div>
                                 </section>
                                 <footer className='restaurantProfileOrders-content-item-footer'>

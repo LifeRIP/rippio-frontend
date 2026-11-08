@@ -1,18 +1,16 @@
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import Modal from 'react-modal';
 import './productModal.css';
 import { useState } from 'react';
-import { useEffect } from 'react';
 
-export const ProductModal = ({ productInModal, restaurant, isOpen, handleAddBtn, handleCancelBtn }) => {
+
+export const ProductModal = (props) => <ProductModalForm key={(props.productInModal?.id || 'empty') + ':' + props.isOpen} {...props} />;
+
+const ProductModalForm = ({ productInModal, restaurant, isOpen, handleAddBtn, handleCancelBtn }) => {
 
     const [quantity, setQuantity] = useState(1)
     const [product, setProduct] = useState(productInModal)
 
-    useEffect(() => {
-        setProduct(productInModal)
-    }, [productInModal])
 
     const increaseQuantity = () => {
         setQuantity(quantity + 1)

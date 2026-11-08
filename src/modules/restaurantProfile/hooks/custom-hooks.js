@@ -14,10 +14,11 @@ export const useRestaurantOrders = () => {
   const [orders, setOrders] = useState(null);
 
   // Estado para almacenar pedidos filtrados
-  const [filteredOrders, setFilteredOrders] = useState(null);
+
 
   // Estado para almacenar la selección del filtro
-  const [selectedFilter, setSelectedFilter] = useState(null);
+  const [selectedFilter, setSelectedFilter] = useState('Pendiente');
+  const filteredOrders = orders && (selectedFilter === 'Todos' ? orders : orders.filter(order => order.estado === selectedFilter));
 
   // Estado para mostrar el modal de detalles del pedido
   const [isOpen, setIsOpen] = useState(false);
@@ -45,23 +46,6 @@ export const useRestaurantOrders = () => {
   }, [token]);
 
   // UseEffect para filtrar los pedidos
-  useEffect(() => {
-    // Si no hay pedidos, no hacer nada
-    if (!orders) return;
-    // Si no hay filtro seleccionado, mostrar los Pendiente
-    if (!selectedFilter) {
-      setSelectedFilter("Pendiente");
-      return;
-    }
-    if (selectedFilter === "Todos") {
-      setFilteredOrders(orders);
-    } else {
-      const filtered = orders.filter(
-        (order) => order.estado === selectedFilter
-      );
-      setFilteredOrders(filtered);
-    }
-  }, [selectedFilter, orders]);
 
   const handleChangeFilter = (selectedOption) => {
     setSelectedFilter(selectedOption.value);

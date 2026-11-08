@@ -1,6 +1,5 @@
 import { media } from '@m/core/utils/media';
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import './planSection.css'
 import { getPlans } from '@/api/plan'
 import { Link } from 'react-router-dom'
@@ -62,9 +61,9 @@ export function PlanSection({pay_method, getPlan}) {
                                 </header>
                                 <ul className='plan-ul'>
                                     {   plan.descripcion &&
-                                        plan.descripcion.map((feature, index) => {
+                                        plan.descripcion.map((feature) => {
                                             return (
-                                                <li key={index}
+                                                <li key={feature}
                                                 className='plan-ul-li'>{feature}</li>
                                             )
                                         })

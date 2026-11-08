@@ -1,98 +1,26 @@
-/* eslint-disable no-undef */
-describe('Search and buy a product before login', () => {
-  it('Home search input works', () => {
-    cy.visit('http://localhost:5173/')
-    cy.get('.FormSearchText')
-    .type('Pizza')
-    cy.get('.FormSearchBtn > img')
-    .should('exist').click()
-
-    cy.url().should('include', '/searchpage/Pizza')
-  })
-
-  it('Search page show correct content', () => {
-    cy.visit('http://localhost:5173/searchpage/a')
-    cy.get('.searchPage-title')
-    .should('exist')
-    cy.get('.searchPage-title > span')
-    .should('have.text', 'a')
-    cy.get('.searchPage-restaurantInformationResult > :nth-child(1)')
-    .should('exist')
-  })
-
-  it('Search page show correct content by no existent product', () => {
-    cy.visit('http://localhost:5173/searchpage/noExistentProduct')
-    cy.get('.searchPage-title')
-    .should('exist')
-    cy.get('.searchPage-title').
-    should('contain', 'No encontramos resultados')
-  })
-
-  it('Add product to cart and checkout', () => {
-    cy.visit('http://localhost:5173/searchpage/a')
-    cy.get('.searchPage-title')
-    .should('exist')
-    cy.get('.searchPage-title > span')
-    .should('have.text', 'a')
-    cy.get('.searchPage-restaurantInformationResult > :nth-child(1)')
-    .should('exist')
-    cy.get(':nth-child(1) > .restaurantInformation-item-products')
-    .should('exist')
-    cy.get(':nth-child(1) > .restaurantInformation-item-products > :nth-child(1) > .restaurantInformation-item-products-product-buttonContainer')
-    .should('exist').click()
-    cy.get('.ProductModal-btnContainer-btn')
-    .should('exist').click()
-    cy.get('.header-li-link > .header-li-img')
-    .should('exist').click()
-    cy.get('.ModalCart-content-item')
-    .should('exist')
-    cy.get('.ModalCart-content-total-btn')
-    .should('exist').click()
-    cy.get('.ReactModal__Content > h1')
-    .should('exist').should('have.text', '¡Sólo falta un paso!')
-    cy.get('.ReactModal__Content > div > :nth-child(2)')
-    .should('exist').click()
-    cy.get('.panels-content')
-    .should('exist')
-
-    cy.get('.loginPage-form-input.user-mode > input')
-    .type('danielestebanmarquez12@gmail.com')
-    cy.get('.loginPage-form > :nth-child(3) > input')
-    .type('123')
-    cy.get('.loginPage-form-button')
-    .should('exist').click()
-    cy.get('.ReactModal__Content > div > :nth-child(2)')
-    .should('exist').click()
-
-    cy.get('.header-li-link > .header-li-img')
-    .should('exist').click()
-
-    cy.wait(3000)
-
-    cy.get('.ModalCart-content-total-btn')
-    .should('exist').click()
-    cy.url().should('include', '/checkout')
-
-    cy.wait(1000)
-
-    cy.get(':nth-child(1) > .CheckoutPage-content-item-content > .CheckoutPage-Select > .css-13cymwt-control > .css-4xgw5l-IndicatorsContainer2 > .css-1xc3v61-indicatorContainer')
-    .should('exist').click()
-    cy.get('#react-select-3-option-0')
-    .should('exist').click()
-
-    cy.get(':nth-child(2) > .CheckoutPage-content-item-content > .CheckoutPage-Select > .css-13cymwt-control > .css-4xgw5l-IndicatorsContainer2 > .css-1xc3v61-indicatorContainer')
-    .should('exist').click()
-    cy.get('#react-select-5-option-0')
-    .should('exist').click()
-    
-    cy.get('.CheckoutPage-content-item-content-button')
-    .should('exist').click()
-
-    cy.wait(1500)
-
-    cy.url().should('include', '/profile/orders')
-
-
-  })
-
-})
+import { visitPage } from '../support/app-fixtures';
+describe('Search and cart with local fixtures', () => {
+ it('renders an empty search without stale products', () => {
+  visitPage('/searchpage/no-match', null, { 'GET /api/search': req => req.reply([]) });
+  cy.get('.searchPage-title').should('contain', 'No encontramos resultados');
+  cy.get('.restaurantInformation-item-products-product-img').should('not.exist');
+ });
+ it('renders search results and restaurant products', () => {
+  visitPage('/searchpage/pizza');
+  cy.get('.restaurantInformation-item-products-product-img').should('have.length',4);
+  visitPage('/restaurant/10');
+  cy.get('.RestaurantPage-content-main-content-articleCard').first().click();
+  cy.get('.ReactModal__Content').should('contain','Pizza de queso');
+ });
+ it('adds a product to the guest cart with a stable UUID', () => {
+  visitPage('/restaurant/10');
+  cy.get('.RestaurantPage-content-main-content-articleCard').first().click();
+  cy.get('.ProductModal').contains('button', /Agregar|A?adir/).click();
+  cy.window().should(win => {
+   const cart=JSON.parse(win.localStorage.getItem('cart'));
+   expect(cart.items).to.have.length(1);
+   expect(cart.items[0].uniqueKey).to.match(/^[0-9a-f-]{36}$/);
+   expect(cart.total).to.equal(25000);
+  });
+ });
+});

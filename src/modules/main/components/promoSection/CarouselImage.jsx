@@ -1,5 +1,4 @@
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import { register } from 'swiper/element/bundle';
 import './carouselImage.css';
 // register Swiper custom elements

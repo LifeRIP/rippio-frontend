@@ -1,7 +1,7 @@
 // Importa la función 'create' de la biblioteca 'zustand'
 import { create } from 'zustand'
 import { getCart, addToCart, removeFromCart, clearCart } from '@/api/cart';
-import uuid from 'react-uuid';
+
 
 
 const saveCartToLocalStorage = (cart) => {
@@ -77,7 +77,7 @@ export const useCart = create((set) => {
                                 observation: item.observacion,
                             },
                             quantity: item.cantidad_prod,
-                            uniqueKey: uuid()
+                            uniqueKey: crypto.randomUUID()
                         }
                     }),
                     total: res.data.reduce((acc, item) => acc + item.cost_unit * item.cantidad_prod, 0),
@@ -126,7 +126,7 @@ export const useCart = create((set) => {
                 if (updatedCart) return updatedCart;
 
                 // Agrega una key única al item
-                item.uniqueKey = uuid();
+                item.uniqueKey = crypto.randomUUID();
                 // Agrega el nuevo item al carrito
                 cart.items = [...cart.items,
                 {

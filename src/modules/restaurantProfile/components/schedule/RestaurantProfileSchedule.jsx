@@ -1,6 +1,6 @@
 import Select from 'react-select'
 import './restaurantProfileSchedule.css'
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Switch } from '@mui/material';
 import { useAuth } from '@m/core/hooks/useAuth';
 import { getSchedule, addSchedule, updateSchedule } from '@/api/schedule';
@@ -42,11 +42,10 @@ export default function RestaurantProfileSchedule() {
     })
 
 
-const formatSchedule = (mySchedule) => {
+const formatSchedule = useCallback((mySchedule) => {
     const dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
     const formatSchedule = {
-        ...schedule,
         dias: mySchedule.map(dia => dia.dia_semana),
         inicio: {},
         fin: {}
@@ -62,7 +61,7 @@ const formatSchedule = (mySchedule) => {
 
     setIsOpen(isOpen);
     setSchedule(formatSchedule);
-}
+}, [])
 
     const customStyles = {
         menu: (provided) => ({
@@ -134,37 +133,24 @@ const formatSchedule = (mySchedule) => {
         }
     ]
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(Boolean(token))
     const [error, setError] = useState(null)
     const [haveSchedule, setHaveSchedule] = useState(false)
 
     useEffect(() => {
         if (error) {
-            setTimeout(() => {
-                setError(null)
-            }, 5000)
+            const timer = setTimeout(() => { setError(null); }, 5000);
+            return () => clearTimeout(timer);
         }
     }, [error])
 
 
 
-    const getMySchedule = async (token) => {
-        setLoading(true)
-        try {
-            const res = await getSchedule(token)
-            if (res.data.length == 0) {
-                setLoading(false)
-                setHaveSchedule(false)
-                return
-            }
-            const mySchedule = res.data
-            formatSchedule(mySchedule)
-            setHaveSchedule(true)
-        } catch (error) {
-            console.log(error);
-        }
-        setLoading(false)
-    }
+    const getMySchedule = useCallback((token) => getSchedule(token).then(({ data }) => {
+        if (data.length === 0) { setHaveSchedule(false); return; }
+        formatSchedule(data);
+        setHaveSchedule(true);
+    }).catch(console.error).then(() => setLoading(false)), [formatSchedule])
 
     const addMySchedule = async (token, schedule) => {
         setLoading(true)
@@ -195,7 +181,7 @@ const formatSchedule = (mySchedule) => {
         if (token) {
             getMySchedule(token)
         }
-    }, [token, haveSchedule], [])
+    }, [token, getMySchedule])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -255,7 +241,7 @@ const formatSchedule = (mySchedule) => {
                                                     })
                                                 }
                                             }}
-                                            inputProps={{ 'aria-label': 'controlled' }}
+                                            slotProps={{ input: { 'aria-label': 'controlled' } }}
                                         />
                                     </div>
                                     {

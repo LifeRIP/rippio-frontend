@@ -102,7 +102,7 @@ export function Checkout() {
                                     className={
                                         useCredits ? 'CheckoutPage-credits-active' : ''
                                     }
-                                >(${
+                                >({'$'}{
                                         useCredits ?
                                             orderInfo.totalCreditos
                                             : user.creditos

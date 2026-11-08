@@ -1,5 +1,4 @@
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import './orderDetailModal.css'
 import Modal from 'react-modal'
 import { useDetailOrderModal } from '../../hooks/custom-hooks';
@@ -43,8 +42,8 @@ export function OrderDetailModal({ isOpen, closeModal, order, setSelectedOrder }
                     {
                         loading ? <p>Cargando...</p> :
                             products ?
-                                products.map((product, index) => (
-                                    <article key={index} className='OrderDetailModal-product'>
+                                products.map((product) => (
+                                    <article key={(product.id_producto || product.id || product.nombre) + ':' + (product.observacionp || product.Observaciones || '')} className='OrderDetailModal-product'>
                                         <AppImage kind="product" name={product.nombre} draggable='false' src={product.img_product} alt={product.nombre} />
                                         <div className='OrderDetailModal-productInfo'>
                                             <h3>{product.nombre}</h3>

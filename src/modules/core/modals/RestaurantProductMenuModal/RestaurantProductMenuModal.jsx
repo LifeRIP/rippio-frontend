@@ -1,15 +1,21 @@
+import { useRef } from 'react';
 import { media } from '@m/core/utils/media';
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import Modal from 'react-modal'
 import './restaurantProductMenuModal.css'
 import Select from 'react-select';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Tippy from '@tippyjs/react';
 
 
 
-export default function RestaurantProductMenuModal({ loading, setFile, isModalOpen, handleCancel, handleConfirm, setProduct, categories, newProduct, productSelectedToEdit, loadingProduct }) {
+export default function RestaurantProductMenuModal(props) {
+    return <ProductMenuForm key={(props.productSelectedToEdit?.id || 'new') + ':' + props.isModalOpen} {...props} />;
+}
+
+function ProductMenuForm({ loading, setFile, isModalOpen, handleCancel, handleConfirm, setProduct, categories, newProduct, productSelectedToEdit, loadingProduct }) {
+    const primaryTooltipRef = useRef(null);
+
 
 
     const categoryOptions = categories.map(category => {
@@ -29,14 +35,9 @@ export default function RestaurantProductMenuModal({ loading, setFile, isModalOp
         uploadProductImage.click();
     }
 
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState(productSelectedToEdit?.img_product || '')
 
 
-    useEffect(() => {
-        if (productSelectedToEdit && image !== productSelectedToEdit.img_product) {
-            setImage(productSelectedToEdit.img_product);
-        }
-    }, [productSelectedToEdit]);
 
     const uploadImage = async (file) => {
         if (!file) return;
@@ -209,13 +210,12 @@ export default function RestaurantProductMenuModal({ loading, setFile, isModalOp
                                 required={productSelectedToEdit ? false : true}
                                 type="file" id="uploadProductImage" name="uploadImage" accept=".png, .jpg, .jpeg"
                                 onChange={handleInputProfileChange} />
-                            <Tippy content='Intentaremos dar la mejor presentación al público'>
-                                <button type='button' className="AddProductMenuModal-form-inputImage-Btn" onClick={handleButtonClick}>
+                            <button ref={primaryTooltipRef} type='button' className="AddProductMenuModal-form-inputImage-Btn" onClick={handleButtonClick}>
                                     <AppImage draggable='false' className="AddProductMenuModal-form-inputImage-imgBtn"
                                         src={media.icons.edit}
                                         alt="Upload Icon" />
                                 </button>
-                            </Tippy>
+                        <Tippy content='Intentaremos dar la mejor presentación al público' reference={primaryTooltipRef} />
                         </div>
                         <div
                             className='AddProductMenuModal-form-input AddProductMenuModal-form-inputPrice'

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import {
     Settings, MapPin, CreditCard, CircleDollarSign, Clock3, ClipboardList,

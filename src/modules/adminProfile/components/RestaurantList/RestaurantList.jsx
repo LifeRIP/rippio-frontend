@@ -1,5 +1,4 @@
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import { useNavigate } from 'react-router-dom';
 import { formatDateYMDH_TO_DMY } from '../../utils/constants'
 import SwitchState from '../switchState/SwitchState'

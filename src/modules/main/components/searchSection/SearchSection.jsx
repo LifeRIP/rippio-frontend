@@ -1,6 +1,5 @@
 import { media } from '@m/core/utils/media';
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import './searchSection.css'
 import locationIcon from '/principalPage/icons/locationIcon.png';
 import searchIcon from '/principalPage/icons/searchIcon.png';

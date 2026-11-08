@@ -77,16 +77,20 @@ export const useCheckout = () => {
   const navigator = useNavigate();
 
   // Estado para el costo de envío
-  const [costoEnvio, setCostoEnvio] = useState(3000);
+  const costoEnvio = 3000;
 
   //Estado para saber si usar creditos
   const [useCredits, setUseCredits] = useState(false);
 
   //Objeto para la informacion previa del pedido
-  const [orderBeforeInfo, setOrderBeforeInfo] = useState({});
+  const orderBeforeInfo = { totalCreditos: user.creditos, subTotal: cart.total, total: cart.total + costoEnvio };
 
   //Estado para guardar la información del pedido
-  const [orderInfo, setOrderInfo] = useState({});
+  const orderInfo = useCredits ? {
+    ...orderBeforeInfo,
+    totalCreditos: Math.max(0, user.creditos - orderBeforeInfo.total),
+    total: Math.max(0, orderBeforeInfo.total - user.creditos),
+  } : orderBeforeInfo;
 
   // Estado para saber si el pedido se completó
   const [completeOrder, setCompleteOrder] = useState(false);
@@ -106,37 +110,12 @@ export const useCheckout = () => {
   useEffect(() => {
     loadCartFromDatabase(token);
     console.log("cargadoEnCheckout");
-  }, []);
+  }, [loadCartFromDatabase, token]);
 
   //UseEffect para iniciar la información del pedido
-  useEffect(() => {
-    const NewOrderBeforeInfo = {
-      totalCreditos: user.creditos,
-      subTotal: cart.total,
-      total: cart.total + costoEnvio,
-    };
-    setOrderBeforeInfo(NewOrderBeforeInfo);
-    setOrderInfo(NewOrderBeforeInfo);
-  }, [cart, cart.total, user.creditos, costoEnvio]);
 
   //Función para calcular el total del pedido si incluye creditos o no
-  const calculateTotal = () => {
-    const newUseCredits = !useCredits;
-    if (!newUseCredits) {
-      setOrderInfo(orderBeforeInfo);
-    } else {
-      const newOrderInfo = { ...orderInfo };
-      if (newOrderInfo.totalCreditos >= newOrderInfo.total) {
-        newOrderInfo.totalCreditos -= newOrderInfo.total;
-        newOrderInfo.total = 0;
-      } else {
-        newOrderInfo.total -= newOrderInfo.totalCreditos;
-        newOrderInfo.totalCreditos = 0;
-      }
-      setOrderInfo(newOrderInfo);
-    }
-    setUseCredits(newUseCredits);
-  };
+  const calculateTotal = () => setUseCredits(value => !value);
 
   // Función para actualizar el estado del pedido
   const updateOrder = (name, value) => {

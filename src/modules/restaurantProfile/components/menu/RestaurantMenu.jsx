@@ -1,6 +1,5 @@
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
-import uuid from 'react-uuid'
+
 import './restaurantMenu.css'
 import { useAuth } from '@m/core/hooks/useAuth'
 import { useState } from 'react'
@@ -84,7 +83,7 @@ export default function RestaurantMenu({ categories, setCategories, setSelectedP
                             >
                                 {
                                     category.productos.map((product) => {
-                                        const uniqueKey = uuid()
+                                        const uniqueKey = product.uniqueKey || product.id
                                         return (
                                             <article draggable='true' onDragStart={(e) => handleDragStart(e, product)}
                                                 key={uniqueKey} className={'RestaurantProfileMenu-manage-ddZone-product ' + (product.disponible ? '' : 'ddZone-product-inactive')}>

@@ -14,7 +14,7 @@ export function ProfileCredits(){
             setUser(res.data[0])
         }
         fetchUserData()
-    }, [])
+    }, [user.id, setUser])
 
     return (
         <>

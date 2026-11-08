@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import './RestaurantProfileSettings.css'
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -32,6 +33,9 @@ const customStyles = {
 };
 
 export function RestaurantProfileSettings() {
+    const primaryTooltipRef = useRef(null);
+    const secondaryTooltipRef = useRef(null);
+
 
     const [departamentos, setDepartamentos] = useState([])
     const [ciudades, setCiudades] = useState([])
@@ -74,22 +78,21 @@ export function RestaurantProfileSettings() {
 
 
     // TODO: IMPLEMENTAR PARA RESTAURANTES
-    const [info, setInfo] = useState({
+    const [infoDraft, setInfoDraft] = useState(null);
+    const info = infoDraft || {
         categories: {
-            main: '',
-            secondary: '',
+            main: categories.find(category => category.value === user.id_categoria?.[0]) || '',
+            secondary: categories.find(category => category.value === user.id_categoria?.[1]) || '',
         },
         phone: user.telefono,
         address: {
-            departamento: '',
-            ciudad: '',
-            barrio: '',
-            tipoVia: '',
-            numAddress: '',
-            firstNumAddress: '',
-            secondNumAddress: '',
-        }
-    })
+            departamento: user.departamento ? { value: user.departamento, label: user.departamento } : '',
+            ciudad: user.ciudad ? { value: user.ciudad, label: user.ciudad } : '',
+            barrio: user.barrio || '',
+            tipoVia: user.tipo_via ? { value: user.tipo_via, label: user.tipo_via } : '',
+            numAddress: user.numero_via || '', firstNumAddress: user.numero_uno || '', secondNumAddress: user.numero_dos || '',
+        },
+    };
 
 
     const handleSubmitForm = (e) => {
@@ -117,35 +120,11 @@ export function RestaurantProfileSettings() {
     // UseEffect para quitar el mensaje de error o de éxito después de 5 segundos
     useEffect(() => {
         if (message) {
-            setTimeout(() => {
-                setMessage(null)
-            }, 5000)
+            const timer = setTimeout(() => { setMessage(null); }, 5000);
+            return () => clearTimeout(timer);
         }
     }, [message])
 
-    useEffect(() => {
-        const { departamento, ciudad, barrio, tipo_via, numero_via, numero_uno, numero_dos, telefono, id_categoria } = user
-
-        const mainCategory = categories.find(category => category.value === id_categoria[0]);
-        const secondaryCategory = categories.find(category => category.value === id_categoria[1]);
-        const newInfo = {
-            categories: {
-                main: mainCategory || '',
-                secondary: secondaryCategory || '',
-            },
-            phone: telefono,
-            address: {
-                departamento: { value: departamento, label: departamento } || '',
-                ciudad: { value: ciudad, label: ciudad } || '',
-                barrio: barrio || '',
-                tipoVia: { value: tipo_via, label: tipo_via } || '',
-                numAddress: numero_via || '',
-                firstNumAddress: numero_uno || '',
-                secondNumAddress: numero_dos || '',
-            }
-        }
-        setInfo(newInfo)
-    }, [categories, user])
 
     return (
         <section className='ProfileRestaurantSettings'>
@@ -158,17 +137,15 @@ export function RestaurantProfileSettings() {
                     <legend className="ProfileRestaurantSettings-Legend">Información general</legend>
                     <div className='ProfileRestaurantSettings-GridForm-nameRestaurant-Div'>
                         <label className="hidden-label" htmlFor="nameRestaurant">Nombre del restaurante</label>
-                        <Tippy content='Para cambiar el nombre de tu restaurante, por favor ponte en contacto con el soporte'>
-                            <input className='block-input ProfileRestaurantSettings-Input' readOnly type="text" id="nameRestaurant" name="nameRestaurant"
+                        <input ref={primaryTooltipRef} className='block-input ProfileRestaurantSettings-Input' readOnly type="text" id="nameRestaurant" name="nameRestaurant"
                                 placeholder={user.nombre} />
-                        </Tippy>
+                        <Tippy content='Para cambiar el nombre de tu restaurante, por favor ponte en contacto con el soporte' reference={primaryTooltipRef} />
                     </div>
                     <div className='ProfileRestaurantSettings-GridForm-nameRestaurant-Div'>
                         <label className="hidden-label" htmlFor="nameRestaurant">Nombre del restaurante</label>
-                        <Tippy content='Para cambiar el correo de tu restaurante, por favor ponte en contacto con el soporte'>
-                            <input className='block-input ProfileRestaurantSettings-Input' readOnly type="text" id="emailRestaurant" name="emailRestaurant"
+                        <input ref={secondaryTooltipRef} className='block-input ProfileRestaurantSettings-Input' readOnly type="text" id="emailRestaurant" name="emailRestaurant"
                                 placeholder={user.email} />
-                        </Tippy>
+                        <Tippy content='Para cambiar el correo de tu restaurante, por favor ponte en contacto con el soporte' reference={secondaryTooltipRef} />
                     </div>
                     <div className='ProfileRestaurantSettings-GridForm-Category-Div'>
                         <label className="hidden-label" htmlFor="category">Categoría principal</label>
@@ -178,7 +155,7 @@ export function RestaurantProfileSettings() {
                                 (selectedOption) => {
                                     if (selectedOption != info.categories.secondary) {
                                         const newInfo = { ...info, categories: { ...info.categories, main: selectedOption } }
-                                        setInfo(newInfo)
+                                        setInfoDraft(newInfo)
                                     } else {
                                         alert('La categoría principal no puede ser igual a la secundaria')
                                     }
@@ -194,7 +171,7 @@ export function RestaurantProfileSettings() {
                                 (selectedOption) => {
                                     if (selectedOption != info.categories.main) {
                                         const newInfo = { ...info, categories: { ...info.categories, secondary: selectedOption } }
-                                        setInfo(newInfo)
+                                        setInfoDraft(newInfo)
                                     } else {
                                         alert('La categoría secundaria no puede ser igual a la principal')
                                     }
@@ -215,7 +192,7 @@ export function RestaurantProfileSettings() {
                             onChange={(e) => {
                                 if (e.target.value.length >= 10) e.target.value = e.target.value.slice(0, 10)
                                 const newInfo = { ...info, phone: e.target.value }
-                                setInfo(newInfo)
+                                setInfoDraft(newInfo)
                             }}
                             placeholder='Número de teléfono' />
                     </div>
@@ -230,7 +207,7 @@ export function RestaurantProfileSettings() {
                                 (selectedOption) => {
                                     handleDepartamentoChange(selectedOption)
                                     const newInfo = { ...info, address: { ...info.address, departamento: selectedOption } }
-                                    setInfo(newInfo)
+                                    setInfoDraft(newInfo)
                                 }
                             }
                             styles={customStyles} options={departamentos} placeholder='Seleccionar' />
@@ -242,7 +219,7 @@ export function RestaurantProfileSettings() {
                             className='select' onChange={
                                 (selectedOption) => {
                                     const newInfo = { ...info, address: { ...info.address, ciudad: selectedOption } }
-                                    setInfo(newInfo)
+                                    setInfoDraft(newInfo)
                                 }}
                             styles={customStyles} options={ciudades} placeholder='Seleccionar' />
                     </div>
@@ -253,7 +230,7 @@ export function RestaurantProfileSettings() {
                             onChange={
                                 (e) => {
                                     const newInfo = { ...info, address: { ...info.address, barrio: e.target.value } }
-                                    setInfo(newInfo)
+                                    setInfoDraft(newInfo)
                                 }}
                             className='ProfileRestaurantSettings-Input' type="text" id="address" name="address" required
                             placeholder='Barrio' />
@@ -265,7 +242,7 @@ export function RestaurantProfileSettings() {
                             onChange={
                                 (selectedOption) => {
                                     const newInfo = { ...info, address: { ...info.address, tipoVia: selectedOption } }
-                                    setInfo(newInfo)
+                                    setInfoDraft(newInfo)
                                 }}
                             className='select' styles={customStyles} options={vias} placeholder='Seleccionar' />
                     </div>
@@ -277,7 +254,7 @@ export function RestaurantProfileSettings() {
                                 className='ProfileRestaurantSettings-Input' required type="text" id="numAddress" name="numAddress" maxLength='3'
                                 onChange={(e) => {
                                     const newInfo = { ...info, address: { ...info.address, numAddress: e.target.value } }
-                                    setInfo(newInfo)
+                                    setInfoDraft(newInfo)
                                 }}
                             />
                             #
@@ -287,7 +264,7 @@ export function RestaurantProfileSettings() {
                                     (e) => {
                                         if (e.target.value.length >= 3) e.target.value = e.target.value.slice(0, 3)
                                         const newInfo = { ...info, address: { ...info.address, firstNumAddress: e.target.value } }
-                                        setInfo(newInfo)
+                                        setInfoDraft(newInfo)
                                     }
                                 }
                             />
@@ -298,7 +275,7 @@ export function RestaurantProfileSettings() {
                                     (e) => {
                                         if (e.target.value.length >= 3) e.target.value = e.target.value.slice(0, 3)
                                         const newInfo = { ...info, address: { ...info.address, secondNumAddress: e.target.value } }
-                                        setInfo(newInfo)
+                                        setInfoDraft(newInfo)
                                     }}
                             />
                         </div>

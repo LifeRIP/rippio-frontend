@@ -1,6 +1,5 @@
 import { media } from '@m/core/utils/media';
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import './headerSearch.css'
 
 import { Link, useNavigate } from 'react-router-dom';

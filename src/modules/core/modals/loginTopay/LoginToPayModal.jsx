@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import './loginToPayModal.css'
 import Modal from 'react-modal';
 

@@ -1,5 +1,4 @@
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import Modal from 'react-modal'
 import './orderManage.css'
 import { useEffect, useState } from 'react';
@@ -87,8 +86,8 @@ export default function OrderManage({ order, isOpen, setIsOpen, setSelectedOrder
                     <section className='OrderManage-content-items'>
                         {
                             loading ? <p>Cargando...</p> :
-                                orderDetail && orderDetail.map((product, index) => (
-                                    <article key={index} className='OrderManage-content-items-item'>
+                                orderDetail && orderDetail.map((product) => (
+                                    <article key={(product.id_producto || product.id || product.nombre) + ':' + (product.observacionp || product.Observaciones || '')} className='OrderManage-content-items-item'>
                                         <AppImage kind="product" name={product.nombre} draggable='false' src={product.img_product} alt='food' />
                                         <div>
                                             <div>
@@ -98,8 +97,8 @@ export default function OrderManage({ order, isOpen, setIsOpen, setSelectedOrder
                                             </div>
                                             <div className='OrderManage-content-items-item-cost'>
                                                 <p><b>Cantidad:</b>{product.cantidad_prod}</p>
-                                                <p><b>Unidad:</b>${product.costo_unit}</p>
-                                                <p><b>Subtotal: </b>${product.subtotal}</p>
+                                                <p><b>Unidad:</b>{'$'}{product.costo_unit}</p>
+                                                <p><b>Subtotal: </b>{'$'}{product.subtotal}</p>
                                             </div>
                                         </div>
                                     </article>
@@ -115,9 +114,9 @@ export default function OrderManage({ order, isOpen, setIsOpen, setSelectedOrder
                                         <p><b>Enviar a:</b> {buyerData.nombre + ' ' + buyerData.apellido}</p>
                                         <p><b>Dirección:</b>  {buyerData.direccion}</p>
                                         <p>{buyerData.observacion_direccion}</p>
-                                        <p><b>Subtotal:</b>  ${order.subtotal}</p>
-                                        <p><b>Envío:</b>  ${order.costo_envio}</p>
-                                        <p><b>Total:</b>  ${order.total}</p>
+                                        <p><b>Subtotal:</b>  {'$'}{order.subtotal}</p>
+                                        <p><b>Envío:</b>  {'$'}{order.costo_envio}</p>
+                                        <p><b>Total:</b>  {'$'}{order.total}</p>
                                     </div>
                                     <div className='OrderManage-content-info-buttons'>
 

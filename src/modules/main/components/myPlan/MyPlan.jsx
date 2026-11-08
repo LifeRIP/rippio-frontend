@@ -1,6 +1,5 @@
 import { media } from '@m/core/utils/media';
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import './myPlan.css'
 import { cancelPlan } from '@/api/plan'
 import { useState } from 'react'
@@ -45,9 +44,9 @@ export function MyPlan({ plan, setPlan}) {
                         <p className='myPlan-info-feature-text'>Aprovecha al máximo tu plan con las siguientes características:</p>
                         <ul className='myPlan-info-feature-list'>
                             {
-                                plan.descripcion.map((feature, index) => {
+                                plan.descripcion.map((feature) => {
                                     return (
-                                        <li key={index} className='myPlan-info-item'>{feature}</li>
+                                        <li key={feature} className='myPlan-info-item'>{feature}</li>
                                     )
                                 })
                             }

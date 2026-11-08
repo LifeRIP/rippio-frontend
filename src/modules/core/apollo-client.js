@@ -1,4 +1,5 @@
-import { ApolloClient, ApolloLink, Observable, HttpLink, InMemoryCache, split } from '@apollo/client';
+import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, split } from '@apollo/client';
+import { Observable } from 'rxjs';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { getMainDefinition } from '@apollo/client/utilities';

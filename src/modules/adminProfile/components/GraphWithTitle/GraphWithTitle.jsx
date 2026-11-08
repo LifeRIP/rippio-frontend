@@ -1,16 +1,17 @@
 import { useRef } from "react";
 import { Bar } from "react-chartjs-2";
 import "./graphWithTitle.css";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 
-/* eslint-disable react/prop-types */
 export default function GraphWithTitle({ title, data }) {
     const ref = useRef(null);
     const downloadPDF = async () => {
         try {
             const element = ref.current;
             if (!element) return;
+            const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
+                import('html2canvas'),
+                import('jspdf'),
+            ]);
             const canvas = await html2canvas(element, { scale: 2 });
             const dataToPdf = canvas.toDataURL('image/png');
 
@@ -65,7 +66,7 @@ export default function GraphWithTitle({ title, data }) {
                         datasets: [{
                             label: data.ylabel,
                             data: data.yvalues.map((y) => Math.round(y)),
-                            backgroundColor: data.yvalues.map(() => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.8)`),
+                            backgroundColor: data.yvalues.map((_, index) => ['#159b96', '#60c0bd', '#8a67a5', '#e8ac53'][index % 4]),
                         }]
                     }}
                     options={{ maintainAspectRatio: true }}

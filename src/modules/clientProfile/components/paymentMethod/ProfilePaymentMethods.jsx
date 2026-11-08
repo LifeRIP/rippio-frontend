@@ -12,7 +12,6 @@ export function ProfilePaymentMethods() {
     const token = useAuth((state) => state.token)
     const [arrow, setArrow] = useState(false);
     const [loading, setLoading] = useState(null);
-    const [metodos_pago, setMetodos_pago] = useState([]);
     const [error, setError] = useState(null);
     const [loadingForms, setLoadingForms] = useState(true);
 
@@ -21,6 +20,7 @@ export function ProfilePaymentMethods() {
 
     //Estado para tener los métodos de pago existentes en la BD
     const [typeOfPayments, setTypeOfPayments] = useState([]);
+    const metodos_pago = typeOfPayments.map(type => ({ value: type.id, label: type.nombre }));
 
     // Apariencia de los Select
     const customStyles = {
@@ -50,9 +50,6 @@ export function ProfilePaymentMethods() {
     };
 
     //Añadir los metodos de pago al select
-    useEffect(() => {
-        setMetodos_pago(typeOfPayments.map((type) => ({ value: type.id, label: type.nombre })) || []);
-    }, [typeOfPayments]);
 
     //Obtener los métodos de pago existentes y Obtener los métodos de pago del usuario
     useEffect(() => {

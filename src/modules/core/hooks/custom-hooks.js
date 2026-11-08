@@ -3,7 +3,7 @@ import {
   useMutation,
   useQuery,
   useSubscription,
-} from "@apollo/client";
+} from "@apollo/client/react";
 import { useAuth } from "@m/core/hooks/useAuth";
 import { useState } from "react";
 import { getOrderDetailByID } from "@/api/order";
@@ -13,7 +13,7 @@ import { POST_MESSAGE_IN_ORDER_ID } from "../Chat/graphql-mutations";
 import { SUSCRIBE_BY_ORDER_ID } from "../Chat/graphql-subscription";
 
 
-import { getUserData } from '@/api/auth.jsx';
+import { getUserData } from '@/api/auth.js';
 import { useCart } from '@m/core/hooks/useCart';
 
 export const useDetailOrderModal = (order) => {
@@ -68,8 +68,7 @@ export const useDetailOrderModal = (order) => {
           });
       }
     },
-    [order],
-    []
+    [order]
   );
 
   const setNull = () => {
@@ -144,17 +143,15 @@ export const useChatSubscription = (id) => {
   });
 };
 export const useStart = () => {
-  const user = useAuth((state) => state.user);
+  const userId = useAuth((state) => state.user?.id);
+  const token = useAuth((state) => state.token);
   const setUser = useAuth((state) => state.setUser);
   const isAuthenticated = useAuth((state) => state.isAuthenticated);
-  const fix = window.localStorage.getItem("fix6") == "true";
-  const white = window.localStorage.getItem("white") == "true";
-
-  const { loadCartFromLocalStorage, loadCartFromDatabase, setTokenInCart } =
-    useCart();
+  const loadCartFromLocalStorage = useCart((state) => state.loadCartFromLocalStorage);
+  const loadCartFromDatabase = useCart((state) => state.loadCartFromDatabase);
+  const setTokenInCart = useCart((state) => state.setTokenInCart);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     if (token) {
       console.log("cargada de database");
       setTokenInCart(token);
@@ -163,17 +160,20 @@ export const useStart = () => {
       setTokenInCart(null);
       loadCartFromLocalStorage();
     }
-  }, []);
-
-  const updateUserData = async () => {
-    const newUser = await getUserData(user.id);
-    setUser(newUser.data[0]);
-  };
+  }, [token, loadCartFromDatabase, loadCartFromLocalStorage, setTokenInCart]);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      updateUserData();
-    }
+    if (!isAuthenticated || !userId) return;
+    let active = true;
+    getUserData(userId).then(({ data }) => {
+      if (active) setUser(data[0]);
+    }).catch(console.error);
+    return () => { active = false; };
+  }, [isAuthenticated, userId, setUser]);
+
+  useEffect(() => {
+    const fix = window.localStorage.getItem('fix6') === 'true';
+    const white = window.localStorage.getItem('white') === 'true';
     if (!fix) {
       window.localStorage.clear();
       window.localStorage.setItem("fix6", "true");

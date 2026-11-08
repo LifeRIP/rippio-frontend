@@ -55,8 +55,8 @@ export function ProfileOrders() {
                                         <div className={`ProfileOrders-orderItem-body-AbsoluteInfo ` + `ProfileOrders-orderItem-body-AbsoluteInfo-${order.id}`}
                                         >
                                             <ul className='ProfileOrders-orderItem-body-ul'>
-                                                {order.productos.map((product, index) => (
-                                                    <li key={index} className='ProfileOrders-orderItem-body-li'>
+                                                {order.productos.map((product) => (
+                                                    <li key={(product.id_producto || product.id || product.nombre) + ':' + (product.observacionp || product.Observaciones || '')} className='ProfileOrders-orderItem-body-li'>
                                                         <p className='ProfileOrders-orderItem-body-li-p'>{product.cantidad + " " + product.nombre}</p>
                                                         {/* <p className='ProfileOrders-orderItem-body-li-p'>{product.Observaciones}</p> */}
                                                     </li>

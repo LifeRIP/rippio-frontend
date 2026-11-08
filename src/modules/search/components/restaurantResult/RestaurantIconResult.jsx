@@ -1,5 +1,4 @@
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom'
 import './restaurantIconResult.css'
 

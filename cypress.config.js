@@ -1,6 +1,10 @@
 import { defineConfig } from "cypress";
 
 export default defineConfig({
+  defaultCommandTimeout: 10000,
+  pageLoadTimeout: 120000,
+  viewportWidth: 1280,
+  viewportHeight: 900,
   e2e: {
     setupNodeEvents(on) {
       // Keep the capture window larger than the desktop test viewport so

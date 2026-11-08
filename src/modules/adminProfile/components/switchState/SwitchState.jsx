@@ -1,5 +1,4 @@
 import './switchState.css'
-/* eslint-disable react/prop-types */
 export default function SwitchState({ state, handleSwitchState }) {
     return (
         <button className='restaurantList_card_button' onClick={handleSwitchState}>

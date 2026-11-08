@@ -1,6 +1,5 @@
 import { media } from '@m/core/utils/media';
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import { useState } from 'react'
 import './buyPlanModal.css'
 import Modal from 'react-modal'
@@ -69,8 +68,8 @@ export function BuyPlanModal({ plan, isOpen, closeModal, pay_method, getPlan }) 
                         <h2>Obtener el {plan.nombre}</h2>
                         <ul>
                             {
-                                plan.descripcion.map((feature, index) => {
-                                    return <li key={index}>{feature}</li>
+                                plan.descripcion.map((feature) => {
+                                    return <li key={feature}>{feature}</li>
                                 })
                             }
                         </ul>

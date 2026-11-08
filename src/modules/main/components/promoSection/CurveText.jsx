@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 export function CurveText({children}) {
     return (
         <svg className="Categories-content-item-title" width={100} height={30}>

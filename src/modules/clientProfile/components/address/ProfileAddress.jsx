@@ -2,7 +2,7 @@ import { media } from '@m/core/utils/media';
 import { AppImage } from '@m/core/components/appImage/AppImage';
 import Select from 'react-select'
 import './profileAddress.css';
-import '@/api/address.jsx';
+import '@/api/address.js';
 import { useManageAddress } from '../../hooks/custom-hooks';
 import { useColombiaDepartments } from '@m/core/hooks/useColombiaDepartments';
 

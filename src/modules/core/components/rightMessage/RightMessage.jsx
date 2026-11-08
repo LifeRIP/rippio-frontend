@@ -1,5 +1,4 @@
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import './rightMessage.css';
 
 export default function RightMessage({ message, date, image }) {

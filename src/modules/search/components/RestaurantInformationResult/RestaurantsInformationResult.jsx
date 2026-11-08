@@ -1,6 +1,5 @@
 import { media } from '@m/core/utils/media';
 import { AppImage } from '@m/core/components/appImage/AppImage';
-/* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom'
 import './restaurantsInformationResult.css'
 import { useCart } from '@m/core/hooks/useCart'
