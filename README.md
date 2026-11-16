@@ -2,10 +2,6 @@
 
 Rippio is being developed to be a web application that connects people with restaurants. Your favorite foods in one place.
 
-# Website
-
-[Visit Rippio](https://rippio.netlify.app/)
-
 # How it Works
 
 Rippio includes two methods of use: as a client or as a restaurant. Both can create an account, sign in, and change their password if forgotten.
